@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Home from "containers/HomeTab/Home";
@@ -40,7 +41,7 @@ function App() {
               <Route path="/workouts">
                 <Workouts />
               </Route>
-              <Route path="/achivements">
+              <Route path="/achievements">
                 <Achievements />
               </Route>
               <Route path="/profile">
