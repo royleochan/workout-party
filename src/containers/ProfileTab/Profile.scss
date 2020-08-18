@@ -1,0 +1,131 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.background-image {
+  width: 100vw;
+  height: 300px;
+}
+
+.body {
+  width: 100vw;
+  background-color: #EEEEEE;
+  color: #000000;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.header {
+  flex-direction: row;
+  margin-bottom: 50px;
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.profile-pic {
+  float: left;
+  position: relative;
+  top: -100px;
+  left: 2vw;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
+
+.profile-name {
+  align-self: flex-start;
+  text-align: left;
+  position: relative;
+  left: 55px;
+}
+
+.profile-name-text {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.profile-achievement {
+  text-align: right;
+  position: relative;
+  right: 2vw;
+  top: -55px;
+}
+
+.achievement-preview {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.achievement {
+  display: inline;
+  margin-right: 10px;
+}
+
+.achievement-image {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.profile-info {
+  font-size: 30px;
+  display: block;
+}
+
+.line {
+  height: 5px;
+  width: 100vw;
+  border-width: 3px;
+  border-color: black;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.stats {
+
+}
+
+@import "~bootstrap/scss/bootstrap";
+.progress-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  margin-top: 15px;
+}
+
+.progress-text {
+  position: relative;
+  left: 7vw;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.progress-bar-div {
+  position: absolute;
+  right: 5vw;
+  display: inline-flex;
+  padding-top: 10px;
+}
+
+.custom-progress-bar {
+  height: 30px;
+  width: 80vw;
+  border-radius: 40vw;
+  display: flex;
+  background-color: white;
+}
+
+.history-header {
+  margin-top: 75px;
+  text-align: left;
+  margin-bottom: 50px;
+}
+
+.history-header-text {
+  font-size: 30px;
+  position: relative;
+  left: 5vw;
+}

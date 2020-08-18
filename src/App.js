@@ -15,21 +15,21 @@ function App() {
         <Router>
           <div>
             <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
+              <ul className='nav-bar'>
+                <li className='nav-item'>
+                  <Link className='App-link' to="/">Home</Link>
                 </li>
-                <li>
-                  <Link to="/exercise">Exercise</Link>
+                <li className='nav-item'>
+                  <Link className='App-link' to="/exercise">Exercise</Link>
                 </li>
-                <li>
-                  <Link to="/workouts">Workouts</Link>
+                <li className='nav-item'>
+                  <Link className='App-link' to="/workouts">Workouts</Link>
                 </li>
-                <li>
-                  <Link to="/achievements">Achievements</Link>
+                <li className='nav-item'>
+                  <Link className='App-link' to="/achievements">Achievements</Link>
                 </li>
-                <li>
-                  <Link to="/profile">Profile</Link>
+                <li className='nav-item'>
+                  <Link className='App-link' to="/profile">Profile</Link>
                 </li>
               </ul>
             </nav>
