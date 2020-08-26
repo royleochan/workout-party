@@ -5,6 +5,22 @@ import {Collapse, Divider} from "antd";
 
 const {Panel} = Collapse;
 
+const fakeHistory = [
+    {
+        date: "26 August, Wednesday, 0609",
+        participants: ["bob", "naruto", "muscleman"],
+        exercises: [{name: "Push Ups", reps: "100"}, {name: "Squats", reps: "-100"}],
+        duration: "1"
+    },
+    {
+        date: "24 August, Monday, 1030",
+        participants: ["bob", "naruto", "muscleman"],
+        exercises: [{name: "Push Ups", reps: "100"}, {name: "Squats", reps: "-100000"}],
+        duration: "2"
+    }
+]
+
+
 const Profile = (props) => {
   return (
       <div className='profile'>
@@ -88,11 +104,22 @@ const Profile = (props) => {
               <div className='history-view'>
                   <p className='history-header-text'>Workout History:</p>
                   <Collapse className='history-list' accordion>
-                      <Panel className='history-panel' header="16 August, Sunday, 1930" key="1">
-                          <div>
-                              <p>Participants:</p>
-                          </div>
-                      </Panel>
+                      {
+                          fakeHistory.map((history, index) =>
+                              <Panel className='history-panel' header={history.date} key={index}>
+                                  <div className='participants-div'>
+                                      <p>Participants:</p>
+                                      {history.participants.map(user =>
+                                          <p>{user}</p>
+                                      )}
+                                  </div>
+                                  {history.exercises.map(exercise =>
+                                      <p>{exercise.name}: {exercise.reps}</p>
+                                  )}
+                                  <p>Duration: {history.duration} hours</p>
+                              </Panel>
+                          )
+                      }
                   </Collapse>
               </div>
 
