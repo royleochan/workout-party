@@ -89,9 +89,7 @@ const Profile = (props) => {
                   <p className='history-header-text'>Workout History:</p>
                   <Collapse className='history-list' accordion>
                       <Panel className='history-panel' header="16 August, Sunday, 1930" key="1">
-                          <div>
-                              <p>Participants:</p>
-                          </div>
+                          <text style={{width: '90%'}}>Participants:</text>
                       </Panel>
                   </Collapse>
               </div>
