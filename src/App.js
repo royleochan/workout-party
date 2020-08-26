@@ -11,8 +11,8 @@ import Achievements from "containers/AchievementsTab/Achievements";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Router>
+      <Router>
+        <header className="App-header">
           <div>
             <nav>
               <ul className='nav-bar'>
@@ -33,27 +33,28 @@ function App() {
                 </li>
               </ul>
             </nav>
-
-            <Switch>
-              <Route path="/exercise">
-                <Exercise />
-              </Route>
-              <Route path="/workouts">
-                <Workouts />
-              </Route>
-              <Route path="/achievements">
-                <Achievements />
-              </Route>
-              <Route path="/profile">
-                <Profile />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
           </div>
-        </Router>
-      </header>
+        </header>
+        <div>
+          <Switch>
+            <Route path="/exercise">
+              <Exercise />
+            </Route>
+            <Route path="/workouts">
+              <Workouts />
+            </Route>
+            <Route path="/achievements">
+              <Achievements />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }

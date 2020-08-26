@@ -1,6 +1,9 @@
 import React from "react";
 import "./Profile.scss";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import {Collapse, Divider} from "antd";
+
+const {Panel} = Collapse;
 
 const Profile = (props) => {
   return (
@@ -20,7 +23,7 @@ const Profile = (props) => {
                       />
                   </li>
                   <li className='profile-name'>
-                      <text className='profile-name-text'>Jenny Parker</text>
+                      <p className='profile-name-text'>Jenny Parker</p>
                   </li>
                   <li className='profile-achievement'>
                       <ul className='achievement-preview'>
@@ -48,43 +51,51 @@ const Profile = (props) => {
                       </ul>
                   </li>
               </ul>
-              <text className='profile-info'>I do 100 push-ups everyday. My friends call me one-punch man.</text>
-              <hr className='line'/>
+              <p className='profile-info'>I do 100 push-ups everyday. My friends call me one-punch man.</p>
+              <Divider className='line'/>
               <div>
                   <div className='progress-row'>
-                      <text className='progress-text'>Chest</text>
+                      <p className='progress-text'>Chest</p>
                       <div className='progress-bar-div'>
                           <ProgressBar className='custom-progress-bar' variant="success" now={50} />
                       </div>
                   </div>
                   <div className='progress-row'>
-                      <text className='progress-text'>Shoulder</text>
+                      <p className='progress-text'>Shoulder</p>
                       <div className='progress-bar-div'>
                           <ProgressBar className='custom-progress-bar' variant="success" now={40} />
                       </div>
                   </div>
                   <div className='progress-row'>
-                      <text className='progress-text'>Arms</text>
+                      <p className='progress-text'>Arms</p>
                       <div className='progress-bar-div'>
                           <ProgressBar className='custom-progress-bar' variant="success" now={60} />
                       </div>
                   </div>
                   <div className='progress-row'>
-                      <text className='progress-text'>Core</text>
+                      <p className='progress-text'>Core</p>
                       <div className='progress-bar-div'>
                           <ProgressBar className='custom-progress-bar' variant="success" now={80} />
                       </div>
                   </div>
                   <div className='progress-row'>
-                      <text className='progress-text'>Legs</text>
+                      <p className='progress-text'>Legs</p>
                       <div className='progress-bar-div'>
                           <ProgressBar className='custom-progress-bar' variant="success" now={0.5} />
                       </div>
                   </div>
               </div>
-              <div className='history-header'>
-                  <text className='history-header-text'>Workout History:</text>
+              <div className='history-view'>
+                  <p className='history-header-text'>Workout History:</p>
+                  <Collapse className='history-list' accordion>
+                      <Panel className='history-panel' header="16 August, Sunday, 1930" key="1">
+                          <div>
+                              <p>Participants:</p>
+                          </div>
+                      </Panel>
+                  </Collapse>
               </div>
+
           </div>
       </div>
   );

@@ -1,5 +1,11 @@
-.profile {
+@mixin flexAlign {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile {
+  @include flexAlign;
   flex-direction: column;
 }
 
@@ -35,15 +41,13 @@
 }
 
 .profile-name {
-  align-self: flex-start;
   text-align: left;
-  position: relative;
-  left: 55px;
-}
-
-.profile-name-text {
-  font-size: 48px;
-  font-weight: bold;
+  display: flex;
+  p {
+    font-size: 48px;
+    font-weight: bold;
+    padding-left: 55px;
+  }
 }
 
 .profile-achievement {
@@ -75,12 +79,7 @@
 }
 
 .line {
-  height: 5px;
-  width: 100vw;
-  border-width: 3px;
-  border-color: black;
-  margin-bottom: 50px;
-  margin-top: 50px;
+  border-top: 2px solid black;
 }
 
 .stats {
@@ -89,25 +88,27 @@
 
 @import "~bootstrap/scss/bootstrap";
 .progress-row {
+  display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: left;
   margin-top: 15px;
-}
-
-.progress-text {
-  position: relative;
-  left: 7vw;
-  font-weight: bold;
-  font-size: 24px;
+  p {
+    position: relative;
+    left: 7vw;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 0;
+  }
 }
 
 .progress-bar-div {
   position: absolute;
   right: 5vw;
-  display: inline-flex;
-  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-progress-bar {
@@ -118,7 +119,9 @@
   background-color: white;
 }
 
-.history-header {
+.history-view {
+  display: flex;
+  flex-direction: column;
   margin-top: 75px;
   text-align: left;
   margin-bottom: 50px;
@@ -128,4 +131,14 @@
   font-size: 30px;
   position: relative;
   left: 5vw;
+}
+
+.history-list {
+  width: 80vw;
+  align-self: center;
+}
+
+.history-panel {
+  border: 1px solid black !important;
+  font-size: 24px;
 }
