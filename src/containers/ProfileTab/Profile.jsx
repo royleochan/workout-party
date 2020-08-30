@@ -5,6 +5,26 @@ import {Collapse, Divider} from "antd";
 
 const {Panel} = Collapse;
 
+const fakeProfile = {
+    name: "Jenny Parker",
+    image_url: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
+    bg_image_url: 'https://www.solidbackgrounds.com/images/2560x1440/2560x1440-davys-grey-solid-color-background.jpg',
+    top_three_achievements: [
+        {
+            name: 'one',
+            image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png'
+        },
+        {
+            name: 'two',
+            image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png'
+        },
+        {
+            name: 'three',
+            image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png'
+        }
+    ]
+}
+
 const fakeHistory = [
     {
         date: "26 August, Wednesday, 0609",
@@ -26,7 +46,7 @@ const Profile = (props) => {
       <div className='profile'>
           <img
               className='background-image'
-              src='https://www.solidbackgrounds.com/images/2560x1440/2560x1440-davys-grey-solid-color-background.jpg'
+              src={fakeProfile.bg_image_url}
               alt="Background"
           />
           <div className='body'>
@@ -34,36 +54,24 @@ const Profile = (props) => {
                   <li className='profile-pic-item'>
                       <img
                           className='profile-pic'
-                          src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                          src={fakeProfile.image_url}
                           alt="Profile Pic"
                       />
                   </li>
                   <li className='profile-name'>
-                      <p className='profile-name-text'>Jenny Parker</p>
+                      <p className='profile-name-text'>{fakeProfile.name}</p>
                   </li>
                   <li className='profile-achievement'>
                       <ul className='achievement-preview'>
-                          <li className='achievement'>
-                              <img
-                                  className='achievement-image'
-                                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png'
-                                  alt='achievement'
-                              />
-                          </li>
-                          <li className='achievement'>
-                              <img
-                                  className='achievement-image'
-                                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png'
-                                  alt='achievement'
-                              />
-                          </li>
-                          <li className='achievement'>
-                              <img
-                                  className='achievement-image'
-                                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png'
-                                  alt='achievement'
-                              />
-                          </li>
+                          {fakeProfile.top_three_achievements.map(achievement =>
+                              <li className='achievement'>
+                                  <img
+                                      className='achievement-image'
+                                      src={achievement.image_url}
+                                      alt='achievement'
+                                  />
+                              </li>
+                          )}
                       </ul>
                   </li>
               </ul>
