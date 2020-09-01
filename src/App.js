@@ -7,17 +7,21 @@ import Exercise from "containers/ExerciseTab/Exercise";
 import Workouts from "containers/WorkoutsTab/Workouts";
 import Profile from "containers/ProfileTab/Profile";
 import Achievements from "containers/AchievementsTab/Achievements";
+import Login from "containers/LoginPage/Login"
+import Create from "containers/InvitePage/Create"
 
 function App() {
+  
   return (
     <div className="App">
       <Router>
+        { !["/","/invite"].includes(window.location.pathname) && 
         <header className="App-header">
           <div>
             <nav>
               <ul className='nav-bar'>
                 <li className='nav-item'>
-                  <Link className='App-link' to="/">Home</Link>
+                  <Link className='App-link' to="/home">Home</Link>
                 </li>
                 <li className='nav-item'>
                   <Link className='App-link' to="/exercise">Exercise</Link>
@@ -35,6 +39,7 @@ function App() {
             </nav>
           </div>
         </header>
+        }
         <div>
           <Switch>
             <Route path="/exercise">
@@ -49,8 +54,14 @@ function App() {
             <Route path="/profile">
               <Profile />
             </Route>
-            <Route path="/">
+            <Route path="/home">
               <Home />
+            </Route>
+            <Route path="/invite">
+              <Create />
+            </Route>
+            <Route path="/">
+              <Login />
             </Route>
           </Switch>
         </div>
