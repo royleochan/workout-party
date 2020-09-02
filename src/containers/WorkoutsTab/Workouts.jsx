@@ -12,7 +12,7 @@ const Workouts = (props) => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <div className="page">
+    <div className="workout-page">
       <div className="searchbar-container">
         <SearchBar
           style={{ width: "30%" }}
