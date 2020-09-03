@@ -1,8 +1,10 @@
 import React from "react";
 import WorkoutVideo from "./video.png"
 import {CustomJutsu} from "./CustomJutsu";
+import {useHistory} from "react-router-dom";
 
 const Exercise = (props) => {
+  const history = useHistory();
     return(
         <div style={{display:"flex", flexDirection:"column", alignContent:"center"}}>
             <div style={{height:100}}/>
@@ -22,7 +24,7 @@ const Exercise = (props) => {
                 password={"heylo"}
                 loadingComponent={<p>Racking up the weights</p>}
                 containerStyles={{ width: '100%', height: '400px'}}
-                onMeetingEnd={() => console.log('Meeting has ended')}
+                onMeetingEnd={() => history.push('/victory')}
             />
         </div>
     )
