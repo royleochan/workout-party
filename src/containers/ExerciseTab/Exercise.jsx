@@ -20,10 +20,10 @@ const Exercise = (props) => {
             <div style={{height:100}}/>
             <CustomJutsu
                 roomName={"Iron_heaven"}
-                displayName={"MuscleMan6969"}
+                displayName={""}
                 password={"heylo"}
                 loadingComponent={<p>Racking up the weights</p>}
-                containerStyles={{ width: '100%', height: '400px'}}
+                containerStyles={{ width: '100%', height: '800px'}}
                 onMeetingEnd={() => history.push('/victory')}
             />
         </div>
