@@ -1,10 +1,49 @@
-import React from "react";
+import React, {useRef,useState} from "react";
 import WorkoutVideo from "./video.png"
 import {CustomJutsu} from "./CustomJutsu";
 import {useHistory} from "react-router-dom";
+import Countdown from 'react-countdown';
+import Countdown2 from './Countdown2';
+
 
 const Exercise = (props) => {
+    const [time,setTime] = useState(Date.now() + 0);
   const history = useHistory();
+
+    const handleSubmit = e => { 
+        setTime(Date.now() + (((parseInt(e.target.min.value) * 60)+parseInt(e.target.sec.value)) * 1000))
+      };
+
+  const Completionist = () => 
+      <form onSubmit={handleSubmit}>
+  <input class="input-box" name ="min" type="number" placeholder="Minutes"></input>
+  :
+  <input class="input-box" name ="sec" type="number" placeholder="Seconds"></input>
+  <button type="submit">START</button>
+    </form>
+
+  const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return <Completionist />;
+    } else {
+      // Render a countdown
+      console.log(minutes);
+      console.log(seconds);
+      return <Countdown2 minutes = {minutes} seconds = {seconds}/>
+    }
+  };
+
+  const clockRef = useRef();
+  const handlePause = () => {
+    clockRef.current.isPaused()   
+        ?
+    clockRef.current.start()
+        :
+    clockRef.current.pause()
+
+}
+  
     return(
         <div style={{display:"flex", flexDirection:"column", alignContent:"center"}}>
             <div style={{height:100}}/>
@@ -12,9 +51,34 @@ const Exercise = (props) => {
                 <img src={WorkoutVideo} alt={"Workout Video"} />
                 <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
                     <h3>TIMER</h3>
-                    <h1>16:00</h1>
-
-                    <button>Start / Stop</button>
+                    <Countdown
+                        date={time}
+                        renderer={renderer}
+                        ref = {clockRef}
+                    />
+            <br></br>
+      <button
+        class = "time-home"
+        style={{marginLeft:"10%"}}
+        variant="contained"
+        color='primary'
+        type='submit'
+        onClick={handlePause}
+      >
+        PAUSE/RESUME
+      </button>
+      <br></br>
+      <button
+      class = "time-home"
+      style={{marginLeft:"10%"}}
+        variant="contained"
+        color='primary'
+        type='submit'
+        onClick={() => setTime(0)}
+      >
+        RESET
+      </button>
+                    
                 </div>
             </div>
             <div style={{height:100}}/>

@@ -3,8 +3,10 @@ import Block from "./Block.js";
 import streaky from "./Streaky.png";
 import jesus from "./jesus.jpg";
 import sixpacks from "./sixpacks.jpg";
-import peachy from "./Peachy.jpg";
+import peachy from "./Peachy.png";
 import Button from "./Button";
+import Rock from './rock.png';
+import lock from './lock.png';
 
 const Achievements = (props) => {
   const unlocked = (
@@ -32,32 +34,25 @@ const Achievements = (props) => {
         image={sixpacks}
       />
       <Block
-        header="Stamp of Approval"
-        description="You have been blessed by the CS god"
-        image={jesus}
+        header="The Rock"
+        description="Completed 50 exercises in one month"
+        image={Rock}
       />
-      <Block
-        header="6 Pack Shortcuts"
-        description="Obtained a 6 pack in one day"
-        image={sixpacks}
-      />
-      <Block
-        header="6 Pack Shortcuts"
-        description="Obtained a 6 pack in one day"
-        image={sixpacks}
-      />
+
+
+
     </div>
   );
 
   let blockArray = [];
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 9; i++) {
     blockArray.push(1);
   }
   blockArray = blockArray.map((x) => (
     <Block
-      header="Stamp of Approval"
-      description="You have been blessed by the CS god"
-      image={jesus}
+      header="Unknown"
+      description="Achievement Locked"
+      image={lock}
     />
   ));
 
@@ -88,8 +83,10 @@ const Achievements = (props) => {
 
   return (
     <div>
+      <br/>
       <h1 style={{ textAlign: "left", color: "#black" }}>Unlocked (6)</h1>
       <hr style={{ borderTop: "3px double #8c8b8b" }} />
+      <br/>
       {unlocked}
       <h1 style={{ textAlign: "left", color: "#black" }}>Locked (24)</h1>
       <hr style={{ borderTop: "3px double #8c8b8b" }} />
