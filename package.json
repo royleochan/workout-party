@@ -19,6 +19,8 @@
     "react-component-countdown-timer": "^0.1.8",
     "react-countdown": "^2.2.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.8.2",
+    "react-icons": "^3.11.0",
     "react-jutsu": "^2.2.0",
     "react-native-timekeeper": "^1.0.4",
     "react-redux": "^7.2.1",

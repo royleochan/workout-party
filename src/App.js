@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 import Home from "containers/HomeTab/Home";
 import Exercise from "containers/ExerciseTab/Exercise";
@@ -11,7 +12,14 @@ import Login from "containers/LoginPage/Login";
 import Create from "containers/InvitePage/Create";
 import VictoryPage from "containers/VictoryPage/VictoryPage";
 
+import { AiOutlineLogin } from "react-icons/ai";
+
 function App() {
+  const handleLogout = async () => {
+    await Auth.signOut();
+    window.location.href = "/";
+  };
+
   return (
     <div className="App">
       <Router>
@@ -44,6 +52,9 @@ function App() {
                     <Link className="App-link" to="/profile">
                       Profile
                     </Link>
+                  </li>
+                  <li>
+                    <AiOutlineLogin color={"white"} onClick={handleLogout} />
                   </li>
                 </ul>
               </nav>
