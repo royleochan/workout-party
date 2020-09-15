@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 import { Auth } from "aws-amplify";
 
 import Home from "containers/HomeTab/Home";
@@ -13,6 +15,13 @@ import Create from "containers/InvitePage/Create";
 import VictoryPage from "containers/VictoryPage/VictoryPage";
 
 import { AiOutlineLogin } from "react-icons/ai";
+import authReducer from "store/reducers/auth";
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+const store = createStore(rootReducer);
 
 function App() {
   const handleLogout = async () => {
@@ -21,9 +30,9 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Router>
-        {!["/", "/invite"].includes(window.location.pathname) && (
+    <Provider store={store}>
+      <div className="App">
+        <Router>
           <header className="App-header">
             <div>
               <nav>
@@ -60,37 +69,38 @@ function App() {
               </nav>
             </div>
           </header>
-        )}
-        <div>
-          <Switch>
-            <Route path="/exercise">
-              <Exercise />
-            </Route>
-            <Route path="/workouts">
-              <Workouts />
-            </Route>
-            <Route path="/achievements">
-              <Achievements />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/home">
-              <Home />
-            </Route>
-            <Route path="/invite">
-              <Create />
-            </Route>
-            <Route path="/victory">
-              <VictoryPage />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </div>
+
+          <div>
+            <Switch>
+              <Route path="/exercise">
+                <Exercise />
+              </Route>
+              <Route path="/workouts">
+                <Workouts />
+              </Route>
+              <Route path="/achievements">
+                <Achievements />
+              </Route>
+              <Route path="/profile">
+                <Profile />
+              </Route>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/invite">
+                <Create />
+              </Route>
+              <Route path="/victory">
+                <VictoryPage />
+              </Route>
+              <Route path="/">
+                <Login />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 

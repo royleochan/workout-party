@@ -6,9 +6,18 @@ import axios from "axios";
 
 //Use the 'dispatch' keyword to carry out action functions that will
 //call the corresponding reducer functions
-export const authStart = () => {
+export const authStart = (name, userId, isAuthenticated) => {
   return {
     type: actionTypes.AUTH_START,
+    name,
+    userId,
+    isAuthenticated,
+  };
+};
+
+export const logout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT,
   };
 };
 
@@ -31,12 +40,6 @@ export const authFail = (error) => {
 export const authResetPassword = () => {
   return {
     type: actionTypes.AUTH_RESET,
-  };
-};
-
-export const logout = () => {
-  return {
-    type: actionTypes.AUTH_LOGOUT,
   };
 };
 

@@ -3,17 +3,27 @@ import { updateObject } from "../utility";
 
 //The state that you can use
 const initialState = {
-  email: "",
-  token: "",
+  name: "",
   userId: "",
-  error: null,
-  loading: false,
-  loggedIn: false,
+  isAuthenticated: false,
 };
 
 //updateObject is just a helper function to update the initialState
 const authStart = (state, action) => {
-  return updateObject(state, { error: null, loading: true });
+  const { name, userId, isAuthenticated } = action;
+  return updateObject(state, {
+    name: name,
+    userId: userId,
+    isAuthenticated: isAuthenticated,
+  });
+};
+
+const authLogout = (state, action) => {
+  return updateObject(state, {
+    name: "",
+    userId: null,
+    isAuthenticated: false,
+  });
 };
 
 const authSuccess = (state, action) => {
@@ -31,15 +41,6 @@ const authFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
     loading: false,
-  });
-};
-
-const authLogout = (state, action) => {
-  return updateObject(state, {
-    email: "",
-    token: null,
-    userId: null,
-    loggedIn: false,
   });
 };
 

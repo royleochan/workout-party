@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.scss";
 
+import * as authActions from "store/actions/auth";
+
 const Login = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
   const [isSignup, setIsSignUp] = useState(false);
   const [isValidate, setIsValidate] = useState(false);
@@ -23,8 +29,17 @@ const Login = () => {
 
     try {
       await Auth.signIn(formState.username, formState.password);
-      window.location.href = "/home";
+      const userInfo = await Auth.currentUserInfo();
+      dispatch(
+        authActions.authStart(
+          userInfo.attributes.name,
+          userInfo.attributes.id,
+          true
+        )
+      );
+      history.push("/home");
     } catch (error) {
+      console.log(error);
       alert(error.message);
     }
   };
@@ -57,7 +72,15 @@ const Login = () => {
     try {
       await Auth.confirmSignUp(formState.username, formState.code);
       await Auth.signIn(formState.username, formState.password);
-      window.location.href = "/home";
+      const userInfo = await Auth.currentUserInfo();
+      dispatch(
+        authActions.authStart(
+          userInfo.attributes.name,
+          userInfo.attributes.id,
+          true
+        )
+      );
+      history.push("/home");
     } catch (error) {
       alert(error.message);
     }
