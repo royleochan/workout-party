@@ -38,6 +38,33 @@ html,body
   padding-inline-start: 0px;
 }
 
+.overlay {
+  position: absolute;
+  top: 265px;
+  left: 30px;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #282c34;
+}
+
+.overlay-text {
+  color: white;
+  position: relative;
+  top: 84px;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.profile-pic-item:hover .overlay {
+  opacity: 0.5;
+  height: 200px;
+  width: 200px;
+}
+
 .profile-pic {
   float: left;
   position: relative;
