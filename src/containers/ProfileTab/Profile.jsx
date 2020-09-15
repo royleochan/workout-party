@@ -12,23 +12,6 @@ const fakeProfile = {
     "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
   bg_image_url:
     "https://www.solidbackgrounds.com/images/2560x1440/2560x1440-davys-grey-solid-color-background.jpg",
-  top_three_achievements: [
-    {
-      name: "one",
-      image_url:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png",
-    },
-    {
-      name: "two",
-      image_url:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png",
-    },
-    {
-      name: "three",
-      image_url:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Gold_circle.svg/1024px-Gold_circle.svg.png",
-    },
-  ],
 };
 
 const fakeHistory = [
@@ -70,32 +53,22 @@ const Profile = (props) => {
       />
       <div className="body">
         <ul className="header">
-          <li className="profile-pic-item">
+          <div className='profile-pic-item'>
             <img
-              className="profile-pic"
-              src={fakeProfile.image_url}
-              alt="Profile Pic"
+                className='profile-pic'
+                src={fakeProfile.image_url}
+                alt="Profile Pic"
             />
-          </li>
+            <div className="overlay">
+              <p className="overlay-text">Change Profile Picture</p>
+            </div>
+          </div>
           <li className="profile-name">
             <p className="profile-name-text">{userData.name}</p>
           </li>
-          <li className="profile-achievement">
-            <ul className="achievement-preview">
-              {fakeProfile.top_three_achievements.map((achievement) => (
-                <li className="achievement">
-                  <img
-                    className="achievement-image"
-                    src={achievement.image_url}
-                    alt="achievement"
-                  />
-                </li>
-              ))}
-            </ul>
-          </li>
         </ul>
         <p className="profile-info">
-          I do 100 push-ups everyday. My friends call me one-punch man.
+          {userData.name} has completed X workouts.
         </p>
         <Divider className="line" />
         <div>
