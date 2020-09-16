@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Profile.scss";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Collapse, Divider } from "antd";
-import { useSelector } from "react-redux";
-import {getPastWorkout, getStats, getUserInfo} from "../../ApiHandlers";
+import { Storage } from "aws-amplify";
+import {changeUserPic, getPastWorkout, getStats, getUserInfo} from "../../ApiHandlers";
+import {s3Upload} from "../../libs/awsLib";
+import {useHistory} from "react-router-dom";
 
 const { Panel } = Collapse;
 
@@ -43,11 +45,37 @@ const fakeHistory = [
 ];
 
 const Profile = (props) => {
-  const userData = useSelector((state) => state.auth);
+  const history = useHistory();
+  const [userPic, setPic] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const [userStats, setStats] = useState([]);
   const [userInfo, setInfo] = useState([]);
   Promise.resolve(getStats()).then(stats => setStats(stats));
-  Promise.resolve(getUserInfo()).then(info => setInfo(info));
+  Promise.resolve(getUserInfo())
+      .then(info => {
+        setInfo(info);
+        if (info.profilePic) {
+          Promise.resolve(Storage.get(info.profilePic, { level: 'protected' }))
+              .then(url => setPic(url.toString()));
+        }
+      });
+
+  const acceptedTypes = [
+    'image/png',
+    'image/jpg',
+    'image/jpeg',
+  ];
+
+  function handleUpload(file) {
+    try {
+      Promise.resolve(s3Upload(file))
+          .then(pic => changeUserPic(pic))
+          .then(() => history.push("/profile"))
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  }
+
   return (
     <div className="profile">
       <img
@@ -57,17 +85,29 @@ const Profile = (props) => {
       />
       <div className="body">
         <ul className="header">
-          <div className="content">
+          <div className="profile-pic">
             <div>
-              <div className="content-overlay"></div>
+              <div className="profile-pic-overlay"></div>
               <img
-                  className="content-image"
-                  src={userInfo.profilePic ? userInfo.profilePic : fakeProfile.image_url}
-                  alt="Profile Page"
+                  className="profile-pic-image"
+                  src={userPic}
+                  alt="Profile Pic"
               />
-                <div className="content-details fadeIn-top">
-                  <p>Click to change profile picture.</p>
-                </div>
+              <div
+                    className="profile-pic-details fadeIn-top"
+              >
+                <p>Upload new profile picture</p>
+                <input
+                    type="file"
+                    name="file"
+                    accept={acceptedTypes.toString()}
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files.length > 0) {
+                        handleUpload(e.target.files[0]);
+                      }
+                    }}
+                />
+              </div>
             </div>
           </div>
           <li className="profile-name">
@@ -75,7 +115,8 @@ const Profile = (props) => {
           </li>
         </ul>
         <p className="profile-info">
-          {userInfo.name} has completed {userInfo.noOfWorkouts} workouts.
+          {userPic}
+          {/*{userInfo.name} has completed {userInfo.noOfWorkouts} workouts.*/}
         </p>
         <Divider className="line" />
         <div>
@@ -150,7 +191,6 @@ const Profile = (props) => {
                         </div>
                         <p>{history.videoDesc}</p>
                         <p>{history.videoLink}</p>
-                        <p>Duration: {history.duration} hours</p>
                       </Panel>
                   )
                 })}
