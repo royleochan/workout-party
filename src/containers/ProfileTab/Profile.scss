@@ -38,34 +38,9 @@ html,body
   padding-inline-start: 0px;
 }
 
-.overlay {
-  position: absolute;
-  top: 262px;
-  left: 30px;
-  height: 200px;
-  width: 200px;
-  border-radius: 100px;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #282c34;
-}
-
-.overlay-text {
-  color: white;
-  position: relative;
-  top: 84px;
-  font-size: 16px;
-  font-weight: bold;
-  opacity: 1;
-}
-
-.profile-pic-item:hover .overlay {
-  opacity: 0.5;
-  height: 200px;
-  width: 200px;
-}
-
-.profile-pic {
+.content {
+  margin: auto;
+  overflow: hidden;
   float: left;
   position: relative;
   top: -100px;
@@ -73,6 +48,62 @@ html,body
   height: 200px;
   width: 200px;
   border-radius: 100px;
+}
+
+.content .content-overlay {
+  background: rgba(0,0,0,0.7);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay{
+  opacity: 1;
+}
+
+.content-image{
+  width: 100%;
+}
+
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.content-details p{
+  color: #fff;
+  font-size: 14pt;
+}
+
+.fadeIn-top{
+  top: 20%;
 }
 
 .profile-name {
@@ -83,29 +114,6 @@ html,body
     font-weight: bold;
     padding-left: 55px;
   }
-}
-
-.profile-achievement {
-  text-align: right;
-  position: relative;
-  right: 2vw;
-  top: -55px;
-}
-
-.achievement-preview {
-  list-style-type: none;
-  padding-inline-start: 0px;
-}
-
-.achievement {
-  display: inline;
-  margin-right: 10px;
-}
-
-.achievement-image {
-  width: 50px;
-  height: 50px;
-  position: relative;
 }
 
 .profile-info {

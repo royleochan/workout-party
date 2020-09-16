@@ -53,14 +53,17 @@ const Profile = (props) => {
       />
       <div className="body">
         <ul className="header">
-          <div className='profile-pic-item'>
-            <img
-                className='profile-pic'
-                src={fakeProfile.image_url}
-                alt="Profile Pic"
-            />
-            <div className="overlay">
-              <p className="overlay-text">Change Profile Picture</p>
+          <div className="content">
+            <div>
+              <div className="content-overlay"></div>
+              <img
+                  className="content-image"
+                  src={fakeProfile.image_url}
+                  alt="Profile Page"
+              />
+                <div className="content-details fadeIn-top">
+                  <p>Click to change profile picture.</p>
+                </div>
             </div>
           </div>
           <li className="profile-name">
