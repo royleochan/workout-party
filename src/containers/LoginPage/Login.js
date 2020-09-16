@@ -83,7 +83,7 @@ const Login = () => {
       );
       Promise.all([
           createStats(),
-          createUserInfo()
+          createUserInfo(userInfo.attributes.name)
       ]).then(() => {
         history.push("/home");
       })

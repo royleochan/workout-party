@@ -62,7 +62,7 @@ const Profile = (props) => {
               <div className="content-overlay"></div>
               <img
                   className="content-image"
-                  src={fakeProfile.image_url}
+                  src={userInfo.profilePic ? userInfo.profilePic : fakeProfile.image_url}
                   alt="Profile Page"
               />
                 <div className="content-details fadeIn-top">
@@ -71,11 +71,11 @@ const Profile = (props) => {
             </div>
           </div>
           <li className="profile-name">
-            <p className="profile-name-text">{userData.name}</p>
+            <p className="profile-name-text">{userInfo.name}</p>
           </li>
         </ul>
         <p className="profile-info">
-          {userData.name} has completed {userInfo.noOfWorkouts} workouts.
+          {userInfo.name} has completed {userInfo.noOfWorkouts} workouts.
         </p>
         <Divider className="line" />
         <div>
