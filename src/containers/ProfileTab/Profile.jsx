@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.scss";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Collapse, Divider } from "antd";
 import { useSelector } from "react-redux";
+import {getStats} from "../../ApiHandlers";
 
 const { Panel } = Collapse;
 
@@ -43,7 +44,8 @@ const fakeHistory = [
 
 const Profile = (props) => {
   const userData = useSelector((state) => state.auth);
-  console.log(userData);
+  const [userStats, setStats] = useState([]);
+  Promise.resolve(getStats()).then(stats => setStats(stats));
   return (
     <div className="profile">
       <img
@@ -76,52 +78,52 @@ const Profile = (props) => {
         <Divider className="line" />
         <div>
           <div className="progress-row">
-            <p className="progress-text">Chest</p>
+            <p className="progress-text">Chest Lv {userStats.chestLevel}</p>
             <div className="progress-bar-div">
               <ProgressBar
                 className="custom-progress-bar"
                 variant="success"
-                now={50}
+                now={userStats.chestXp}
               />
             </div>
           </div>
           <div className="progress-row">
-            <p className="progress-text">Shoulder</p>
+            <p className="progress-text">Shoulder Lv {userStats.shoulderLevel}</p>
             <div className="progress-bar-div">
               <ProgressBar
                 className="custom-progress-bar"
                 variant="success"
-                now={40}
+                now={userStats.shoulderXp}
               />
             </div>
           </div>
           <div className="progress-row">
-            <p className="progress-text">Arms</p>
+            <p className="progress-text">Arms Lv {userStats.armsLevel}</p>
             <div className="progress-bar-div">
               <ProgressBar
                 className="custom-progress-bar"
                 variant="success"
-                now={60}
+                now={userStats.armsXp}
               />
             </div>
           </div>
           <div className="progress-row">
-            <p className="progress-text">Core</p>
+            <p className="progress-text">Core Lv {userStats.coreLevel}</p>
             <div className="progress-bar-div">
               <ProgressBar
                 className="custom-progress-bar"
                 variant="success"
-                now={80}
+                now={userStats.coreXp}
               />
             </div>
           </div>
           <div className="progress-row">
-            <p className="progress-text">Legs</p>
+            <p className="progress-text">Legs Lv {userStats.legsLevel}</p>
             <div className="progress-bar-div">
               <ProgressBar
                 className="custom-progress-bar"
                 variant="success"
-                now={0.5}
+                now={userStats.legsXp}
               />
             </div>
           </div>

@@ -5,7 +5,7 @@ export function createStats() {
     return API.post("workout-party", "/stats", {});
 }
 
-export function getStats() {
+export async function getStats() {
     return API.get("workout-party", "/stats", {});
 }
 
