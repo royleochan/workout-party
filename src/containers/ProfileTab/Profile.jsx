@@ -3,7 +3,7 @@ import "./Profile.scss";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Collapse, Divider } from "antd";
 import { Storage } from "aws-amplify";
-import {changeUserPic, getPastWorkout, getStats, getUserInfo} from "../../ApiHandlers";
+import {changeUserPic, getPastWorkout, getStats, getUserInfo, getWorkoutHistory} from "../../ApiHandlers";
 import {s3Upload} from "../../libs/awsLib";
 import {useHistory} from "react-router-dom";
 
@@ -49,8 +49,9 @@ const Profile = (props) => {
   const [userPic, setPic] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const [userStats, setStats] = useState([]);
   const [userInfo, setInfo] = useState([]);
-  const [test, setTest] = useState([]);
+  const [workoutHistory, setHist] = useState([]);
   Promise.resolve(getStats()).then(stats => setStats(stats));
+  // Promise.resolve(getWorkoutHistory()).then(hist => setHist(hist)); <- This line doesn't work for some reason
   Promise.resolve(getUserInfo())
       .then(info => {
         setInfo(info);
@@ -59,6 +60,7 @@ const Profile = (props) => {
               .then(url => setPic(url.toString()));
         }
       });
+
 
   const acceptedTypes = [
     'image/png',
@@ -70,7 +72,6 @@ const Profile = (props) => {
     try {
       Promise.resolve(s3Upload(file))
           .then(pic => changeUserPic(pic))
-          .then(() => history.push("/profile"))
     } catch (error) {
       console.log(error);
       alert(error.message);
@@ -172,31 +173,99 @@ const Profile = (props) => {
         </div>
         <div className="history-view">
           <p className="history-header-text">Workout History:</p>
-          {userInfo.workoutHistory
-              ? <Collapse className="history-list" accordion>
-                {userInfo.workoutHistory.map((id, index) => {
-                  Promise.resolve(getPastWorkout(id))
-                      .then(history => {
-                        return (
-                            <Panel
-                                className="history-panel"
-                                header={history.date}
-                                key={index}
-                            >
-                              <div className="participants-div">
-                                <p>Participants:</p>
-                                {/*{history.participants.map((user) => (*/}
-                                {/*    <p>{user}</p>*/}
-                                {/*))}*/}
-                              </div>
-                              <p>{history.videoDesc}</p>
-                              <p>{history.videoLink}</p>
-                            </Panel>
-                        )
-                      })
-                })}
+          {workoutHistory &&
+          <Collapse className="history-list" accordion>
+                {workoutHistory.first &&
+                Promise.resolve(getPastWorkout(workoutHistory.first))
+                    .then(history => {
+                      return (
+                          <Panel
+                              className="history-panel"
+                              header={history.date}
+                          >
+                            <div className="participants-div">
+                              <p>Participants:</p>
+                              <p>{history.participants}</p>
+                            </div>
+                            <p>{history.videoDesc}</p>
+                            <p>{history.videoLink}</p>
+                          </Panel>
+                      )
+                    })
+                }
+                {workoutHistory.second &&
+                Promise.resolve(getPastWorkout(workoutHistory.second))
+                    .then(history => {
+                      return (
+                          <Panel
+                              className="history-panel"
+                              header={history.date}
+                          >
+                            <div className="participants-div">
+                              <p>Participants:</p>
+                              <p>{history.participants}</p>
+                            </div>
+                            <p>{history.videoDesc}</p>
+                            <p>{history.videoLink}</p>
+                          </Panel>
+                      )
+                    })
+                }
+                {workoutHistory.third &&
+                Promise.resolve(getPastWorkout(workoutHistory.third))
+                    .then(history => {
+                      return (
+                          <Panel
+                              className="history-panel"
+                              header={history.date}
+                          >
+                            <div className="participants-div">
+                              <p>Participants:</p>
+                              <p>{history.participants}</p>
+                            </div>
+                            <p>{history.videoDesc}</p>
+                            <p>{history.videoLink}</p>
+                          </Panel>
+                      )
+                    })
+                }
+                {workoutHistory.fourth &&
+                Promise.resolve(getPastWorkout(workoutHistory.fourth))
+                    .then(history => {
+                      return (
+                          <Panel
+                              className="history-panel"
+                              header={history.date}
+                          >
+                            <div className="participants-div">
+                              <p>Participants:</p>
+                              <p>{history.participants}</p>
+                            </div>
+                            <p>{history.videoDesc}</p>
+                            <p>{history.videoLink}</p>
+                          </Panel>
+                      )
+                    })
+                }
+                {workoutHistory.fifth &&
+                Promise.resolve(getPastWorkout(workoutHistory.fifth))
+                    .then(history => {
+                      return (
+                          <Panel
+                              className="history-panel"
+                              header={history.date}
+                          >
+                            <div className="participants-div">
+                              <p>Participants:</p>
+                              <p>{history.participants}</p>
+                            </div>
+                            <p>{history.videoDesc}</p>
+                            <p>{history.videoLink}</p>
+                          </Panel>
+                      )
+                    })
+                }
               </Collapse>
-              : <p>No workouts available.</p>
           }
         </div>
       </div>

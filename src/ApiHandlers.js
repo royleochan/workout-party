@@ -69,3 +69,26 @@ export function getPastWorkout(id) {
 export function getAllVideos() {
   return API.get("workout-party", `/get_all_videos`);
 }
+
+// API functions for workout-history-data
+
+export function createWorkoutHistory() {
+  return API.post("workout-party", "/workout_history", {});
+}
+
+export function getWorkoutHistory() {
+  return API.get("workout-party", "/workout_history", {});
+}
+
+export function updateWorkoutHistory(newWorkout, currentHistory) {
+  return API.put("workout-party", "/workout_history", {
+    body: {
+      first: currentHistory.first,
+      second: currentHistory.second,
+      third: currentHistory.third,
+      fourth: currentHistory.fourth,
+      size: currentHistory.size,
+      new: newWorkout
+    }
+  });
+}
