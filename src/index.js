@@ -11,7 +11,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 //e.g. Of importing reducers
-//import authReducer from "./store/reducers/auth";
+import authReducer from "./store/reducers/auth";
+import videosReducer from "./store/reducers/videos";
 
 Amplify.configure({
   Auth: {
@@ -32,10 +33,10 @@ Amplify.configure({
       {
         name: "workout-party",
         endpoint: config.apiGateway.URL,
-        region: config.apiGateway.REGION
+        region: config.apiGateway.REGION,
       },
-    ]
-  }
+    ],
+  },
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -44,7 +45,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   //name: reducerName
   //e.g.
-  //auth: authReducer,
+  auth: authReducer,
+  videos: videosReducer,
 });
 
 const store = createStore(
