@@ -3,7 +3,7 @@ import "./Profile.scss";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Collapse, Divider } from "antd";
 import { useSelector } from "react-redux";
-import {getStats} from "../../ApiHandlers";
+import {getPastWorkout, getStats, getUserInfo} from "../../ApiHandlers";
 
 const { Panel } = Collapse;
 
@@ -45,7 +45,9 @@ const fakeHistory = [
 const Profile = (props) => {
   const userData = useSelector((state) => state.auth);
   const [userStats, setStats] = useState([]);
+  const [userInfo, setInfo] = useState([]);
   Promise.resolve(getStats()).then(stats => setStats(stats));
+  Promise.resolve(getUserInfo()).then(info => setInfo(info));
   return (
     <div className="profile">
       <img
@@ -73,7 +75,7 @@ const Profile = (props) => {
           </li>
         </ul>
         <p className="profile-info">
-          {userData.name} has completed X workouts.
+          {userData.name} has completed {userInfo.noOfWorkouts} workouts.
         </p>
         <Divider className="line" />
         <div>
@@ -130,28 +132,31 @@ const Profile = (props) => {
         </div>
         <div className="history-view">
           <p className="history-header-text">Workout History:</p>
-          <Collapse className="history-list" accordion>
-            {fakeHistory.map((history, index) => (
-              <Panel
-                className="history-panel"
-                header={history.date}
-                key={index}
-              >
-                <div className="participants-div">
-                  <p>Participants:</p>
-                  {history.participants.map((user) => (
-                    <p>{user}</p>
-                  ))}
-                </div>
-                {history.exercises.map((exercise) => (
-                  <p>
-                    {exercise.name}: {exercise.reps}
-                  </p>
-                ))}
-                <p>Duration: {history.duration} hours</p>
-              </Panel>
-            ))}
-          </Collapse>
+          {userInfo.workoutHistory
+              ? <Collapse className="history-list" accordion>
+                {userInfo.workoutHistory.map((id, index) => {
+                  const history = getPastWorkout(id);
+                  return (
+                      <Panel
+                          className="history-panel"
+                          header={history.date}
+                          key={index}
+                      >
+                        <div className="participants-div">
+                          <p>Participants:</p>
+                          {history.participants.map((user) => (
+                              <p>{user}</p>
+                          ))}
+                        </div>
+                        <p>{history.videoDesc}</p>
+                        <p>{history.videoLink}</p>
+                        <p>Duration: {history.duration} hours</p>
+                      </Panel>
+                  )
+                })}
+              </Collapse>
+              : <p>No workouts available.</p>
+          }
         </div>
       </div>
     </div>
