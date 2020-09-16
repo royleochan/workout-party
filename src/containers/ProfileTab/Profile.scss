@@ -38,7 +38,7 @@ html,body
   padding-inline-start: 0px;
 }
 
-.content {
+.profile-pic {
   margin: auto;
   overflow: hidden;
   float: left;
@@ -50,7 +50,7 @@ html,body
   border-radius: 100px;
 }
 
-.content .content-overlay {
+.profile-pic .profile-pic-overlay {
   background: rgba(0,0,0,0.7);
   position: absolute;
   height: 100%;
@@ -65,16 +65,16 @@ html,body
   transition: all 0.4s ease-in-out 0s;
 }
 
-.content:hover .content-overlay{
+.profile-pic:hover .profile-pic-overlay{
   opacity: 1;
 }
 
-.content-image{
+.profile-pic-image{
   width: 100%;
 }
 
 
-.content-details {
+.profile-pic-details {
   position: absolute;
   text-align: center;
   padding-left: 1em;
@@ -91,15 +91,20 @@ html,body
   transition: all 0.3s ease-in-out 0s;
 }
 
-.content:hover .content-details{
+.profile-pic:hover .profile-pic-details{
   top: 50%;
   left: 50%;
   opacity: 1;
 }
 
-.content-details p{
-  color: #fff;
-  font-size: 14pt;
+.profile-pic-details p{
+  color: white;
+  font-size: 10pt;
+}
+
+.profile-pic-details input{
+  color: white;
+  font-size: 10pt;
 }
 
 .fadeIn-top{
