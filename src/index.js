@@ -27,15 +27,15 @@ Amplify.configure({
     identityPoolId: config.cognito.IDENTITY_POOL_ID,
   },
   // TODO
-  // API: {
-  //   endpoints: [
-  //     {
-  //       name: "notes",
-  //       endpoint: config.apiGateway.URL,
-  //       region: config.apiGateway.REGION
-  //     },
-  //   ]
-  // }
+  API: {
+    endpoints: [
+      {
+        name: "workout-party",
+        endpoint: config.apiGateway.URL,
+        region: config.apiGateway.REGION
+      },
+    ]
+  }
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

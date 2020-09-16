@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.scss";
+import {createStats, createUserInfo} from "../../ApiHandlers"
 
 import * as authActions from "store/actions/auth";
 
@@ -80,7 +81,12 @@ const Login = () => {
           true
         )
       );
-      history.push("/home");
+      Promise.all([
+          createStats(),
+          createUserInfo()
+      ]).then(() => {
+        history.push("/home");
+      })
     } catch (error) {
       alert(error.message);
     }
