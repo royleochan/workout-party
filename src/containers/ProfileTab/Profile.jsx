@@ -49,6 +49,7 @@ const Profile = (props) => {
   const [userPic, setPic] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const [userStats, setStats] = useState([]);
   const [userInfo, setInfo] = useState([]);
+  const [test, setTest] = useState([]);
   Promise.resolve(getStats()).then(stats => setStats(stats));
   Promise.resolve(getUserInfo())
       .then(info => {
@@ -75,7 +76,6 @@ const Profile = (props) => {
       alert(error.message);
     }
   }
-
   return (
     <div className="profile">
       <img
@@ -115,8 +115,7 @@ const Profile = (props) => {
           </li>
         </ul>
         <p className="profile-info">
-          {userPic}
-          {/*{userInfo.name} has completed {userInfo.noOfWorkouts} workouts.*/}
+          {userInfo.name} has completed {userInfo.noOfWorkouts} workouts.
         </p>
         <Divider className="line" />
         <div>
@@ -176,23 +175,25 @@ const Profile = (props) => {
           {userInfo.workoutHistory
               ? <Collapse className="history-list" accordion>
                 {userInfo.workoutHistory.map((id, index) => {
-                  const history = getPastWorkout(id);
-                  return (
-                      <Panel
-                          className="history-panel"
-                          header={history.date}
-                          key={index}
-                      >
-                        <div className="participants-div">
-                          <p>Participants:</p>
-                          {history.participants.map((user) => (
-                              <p>{user}</p>
-                          ))}
-                        </div>
-                        <p>{history.videoDesc}</p>
-                        <p>{history.videoLink}</p>
-                      </Panel>
-                  )
+                  Promise.resolve(getPastWorkout(id))
+                      .then(history => {
+                        return (
+                            <Panel
+                                className="history-panel"
+                                header={history.date}
+                                key={index}
+                            >
+                              <div className="participants-div">
+                                <p>Participants:</p>
+                                {/*{history.participants.map((user) => (*/}
+                                {/*    <p>{user}</p>*/}
+                                {/*))}*/}
+                              </div>
+                              <p>{history.videoDesc}</p>
+                              <p>{history.videoLink}</p>
+                            </Panel>
+                        )
+                      })
                 })}
               </Collapse>
               : <p>No workouts available.</p>
