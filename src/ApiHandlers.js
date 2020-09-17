@@ -97,10 +97,11 @@ export function getJitsiRoom(id) {
   return API.get("workout-party", `/get_jitsi_room/${id}`);
 }
 
-export function createJitsiRoom(roomId) {
+export function createJitsiRoom(roomId, videoLink) {
   return API.post("workout-party", "/create_jitsi_room", {
     body: {
       roomId: roomId,
+      video: videoLink,
     },
   });
 }

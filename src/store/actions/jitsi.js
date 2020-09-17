@@ -6,17 +6,19 @@ import axios from "axios";
 
 //Use the 'dispatch' keyword to carry out action functions that will
 //call the corresponding reducer functions
-export const jitsiStart = (uuid) => {
+export const jitsiStart = (roomName, video) => {
+  console.log(roomName, video);
   return {
     type: actionTypes.JITSI_START,
-    roomName: uuid,
+    roomName: roomName,
+    video: video,
   };
 };
 
-export const jitsiSuccess = (data) => {
+export const jitsiSuccess = (video) => {
   return {
     type: actionTypes.JITSI_SUCCESS,
-    videos: data,
+    video: video,
   };
 };
 
