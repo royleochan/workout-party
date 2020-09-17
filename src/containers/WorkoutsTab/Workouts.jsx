@@ -72,24 +72,30 @@ const Workouts = (props) => {
   }
 
   return (
-    <div>
-      <div style={{ padding: "2%" }}>
-        <SearchBar
-          style={{ width: "30%" }}
-          placeholder="Search For Workouts..."
-          value={searchValue}
-          onChange={(event) => setSearchValue(event)}
-          onRequestSearch={() => searchHandler(searchValue)}
-        />
+    <div className="workout-page">
+      <div style={{ paddingTop: "2rem" }}>
+        <div style={{ padding: "2%" }}>
+          <SearchBar
+            style={{ width: "30%" }}
+            placeholder="Search For Workouts..."
+            value={searchValue}
+            onChange={(event) => setSearchValue(event)}
+            onRequestSearch={() => searchHandler(searchValue)}
+          />
+        </div>
+        <div style={{marginTop: "2rem"}}>
+          <div>
+            <h1 style={{ color: "white" }}>Our Recommended Workouts</h1>
+          </div>
+          <div className="workout-container">
+            <Divider />
+            <div className="scrolling-wrapper-flexbox">
+              {isFiltered ? filteredArray : blockArray}
+            </div>
+            <Divider />
+          </div>
+        </div>
       </div>
-      <div>
-        <h1>Our Recommended Workouts</h1>
-      </div>
-      <Divider />
-      <div className="scrolling-wrapper-flexbox">
-        {isFiltered ? filteredArray : blockArray}
-      </div>
-      <Divider />
     </div>
   );
 };

@@ -5,8 +5,8 @@ import jesus from "./jesus.jpg";
 import sixpacks from "./sixpacks.jpg";
 import peachy from "./Peachy.png";
 import Button from "./Button";
-import Rock from './rock.png';
-import lock from './lock.png';
+import Rock from "./rock.png";
+import lock from "./lock.png";
 
 const Achievements = (props) => {
   const unlocked = (
@@ -38,9 +38,6 @@ const Achievements = (props) => {
         description="Completed 50 exercises in one month"
         image={Rock}
       />
-
-
-
     </div>
   );
 
@@ -49,11 +46,7 @@ const Achievements = (props) => {
     blockArray.push(1);
   }
   blockArray = blockArray.map((x) => (
-    <Block
-      header="Unknown"
-      description="Achievement Locked"
-      image={lock}
-    />
+    <Block header="Unknown" description="Achievement Locked" image={lock} />
   ));
 
   const [loadMore, setloadMore] = useState(false);
@@ -82,16 +75,16 @@ const Achievements = (props) => {
   );
 
   return (
-    <div>
-      <br/>
-      <h1 style={{ textAlign: "left", color: "#black" }}>Unlocked (6)</h1>
-      <hr style={{ borderTop: "3px double #8c8b8b" }} />
-      <br/>
+    <div style={{ backgroundColor: "#101010" }}>
+      <br />
+      <h1 style={{ textAlign: "left", color: "white" }}>Unlocked (4)</h1>
+      <hr style={{ borderTop: "3px double #E2B254" }} />
+      <br />
       {unlocked}
-      <h1 style={{ textAlign: "left", color: "#black" }}>Locked (24)</h1>
-      <hr style={{ borderTop: "3px double #8c8b8b" }} />
+      <h1 style={{ textAlign: "left", color: "white" }}>Locked (24)</h1>
+      <hr style={{ borderTop: "3px double #E2B254" }} />
       <div style={{ display: "flex", flexDirection: "column" }}>{locked}</div>
-      {loadMoreButton}
+      <div style={{ marginTop: 20 }}>{loadMoreButton}</div>
     </div>
   );
 };

@@ -15,7 +15,10 @@ export default function OutlinedButtons(props) {
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" color="secondary" onClick={props.onClick}>
+      <Button
+        style={{ backgroundColor: "#E2B254", color: "white" }}
+        onClick={props.onClick}
+      >
         {props.description}
       </Button>
     </div>

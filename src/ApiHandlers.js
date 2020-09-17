@@ -71,7 +71,7 @@ export function updatePastWorkout(id, workout) {
 // API functions for videos
 
 export function getAllVideos() {
-  return API.get("workout-party", `/get_all_videos`);
+  return API.get("workout-party", `/get_all_videos`, {});
 }
 
 // API functions for workout-history-data
@@ -94,5 +94,26 @@ export function updateWorkoutHistory(newWorkout, currentHistory) {
       n: newWorkout,
       size: currentHistory.size
     }
+  });
+}
+
+export function getJitsiRoom(id) {
+  return API.get("workout-party", `/get_jitsi_room/${id}`, {});
+}
+
+export function createJitsiRoom(roomId, videoLink) {
+  return API.post("workout-party", "/create_jitsi_room", {
+    body: {
+        roomId: roomId,
+        video: videoLink
+    },
+  });
+}
+
+export function updateJitsiRoom(id, videoLink) {
+  return API.put("workout-party", `/update_jitsi_room/${id}`, {
+    body: {
+      video: videoLink,
+    },
   });
 }
