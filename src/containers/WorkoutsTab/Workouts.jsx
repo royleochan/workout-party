@@ -72,7 +72,7 @@ const Workouts = (props) => {
   }
 
   return (
-    <div>
+    <div className="workout-page">
       <div style={{ padding: "2%" }}>
         <SearchBar
           style={{ width: "30%" }}
@@ -83,13 +83,15 @@ const Workouts = (props) => {
         />
       </div>
       <div>
-        <h1>Our Recommended Workouts</h1>
+        <h1 style={{ color: "white" }}>Our Recommended Workouts</h1>
       </div>
-      <Divider />
-      <div className="scrolling-wrapper-flexbox">
-        {isFiltered ? filteredArray : blockArray}
+      <div className="workout-container">
+        <Divider />
+        <div className="scrolling-wrapper-flexbox">
+          {isFiltered ? filteredArray : blockArray}
+        </div>
+        <Divider />
       </div>
-      <Divider />
     </div>
   );
 };

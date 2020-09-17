@@ -1,21 +1,23 @@
-.scrolling-wrapper-flexbox {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+.workout-page {
+  background: #101010;
+  height: 100vh;
 
-  .card {
-    flex: 0 0 auto;
-    margin-right: 3px;
+  .scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .card {
+      flex: 0 0 auto;
+      margin-right: 3px;
+    }
   }
-}
 
-.scrolling-wrapper,
-.scrolling-wrapper-flexbox {
-  height: 40%;
-  margin-bottom: 20px;
-  width: 100%;
-  -webkit-overflow-scrolling: touch;
-  &::-webkit-scrollbar {
-    display: none;
+  .scrolling-wrapper,
+  .scrolling-wrapper-flexbox {
+    height: 50%;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 }
