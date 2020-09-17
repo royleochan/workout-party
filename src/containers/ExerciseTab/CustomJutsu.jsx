@@ -48,13 +48,17 @@ export const CustomJutsu = (props) => {
     }
 
     useEffect(() => {
+        if(jitsi){
+            jitsi.executeCommand('displayName', displayName)
+        }
+    },[displayName])
+    useEffect(() => {
         if (jitsi) {
             setLoading(false)
             jitsi.executeCommand('subject', subject)
 
             jitsi.addEventListener('videoConferenceJoined', () => {
                 if (password) jitsi.executeCommand('password', password)
-                jitsi.executeCommand('displayName', displayName)
                 // jitsi.executeCommand('tileViewChanged', { enabled: false})
             })
 
