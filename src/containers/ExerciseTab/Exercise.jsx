@@ -70,7 +70,7 @@ const Exercise = (props) => {
         display: "flex",
         flexDirection: "column",
         alignContent: "center",
-        backgroundColor: "#575757",
+        backgroundColor: "#081018",
       }}
     >
       <div style={{ height: 100 }} />
