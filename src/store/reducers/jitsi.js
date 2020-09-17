@@ -5,7 +5,7 @@ import { updateObject } from "../utility";
 const initialState = {
   video: "",
   roomName: "",
-  // loading: false,
+  minutes: 0,
   ended: false,
   error: null,
 };
@@ -16,6 +16,7 @@ const jitsiStart = (state, action) => {
     loading: true,
     roomName: action.roomName,
     video: action.video,
+    minutes: action.minutes,
   });
 };
 

@@ -10,7 +10,7 @@ import { getAllVideos, createJitsiRoom, updateJitsiRoom } from "ApiHandlers";
 import * as videosActions from "store/actions/videos";
 import * as jitsiActions from "store/actions/jitsi";
 import { Divider } from "@material-ui/core";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const searchFunction = (videos, keyword) => {
   let result = videos.filter((vid) => {
@@ -30,16 +30,16 @@ const Workouts = (props) => {
   const history = useHistory();
   const jitsiState = useSelector((state) => state.jitsi);
 
-  const onClickHandler = (videoLink) => {
+  const onClickHandler = (videoLink, minutes) => {
     if (jitsiState.roomName == "") {
       const roomName = uuidv4();
-      dispatch(jitsiActions.jitsiStart(roomName, videoLink));
+      dispatch(jitsiActions.jitsiStart(roomName, videoLink, minutes));
       createJitsiRoom(roomName, videoLink);
     } else {
-      dispatch(jitsiActions.jitsiSuccess(videoLink));
+      dispatch(jitsiActions.jitsiSuccess(videoLink, minutes));
       updateJitsiRoom(jitsiState.roomName, videoLink);
     }
-      history.push("/exercise");
+    history.push("/exercise");
   };
 
   const searchHandler = (keyword) => {
@@ -70,7 +70,7 @@ const Workouts = (props) => {
         header=""
         description={vid.description}
         image={vid.image}
-        link={vid.videoLink}
+        minutes={vid.minutes}
         onClick={() => onClickHandler(vid.videoLink)}
       />
     );
@@ -82,7 +82,7 @@ const Workouts = (props) => {
         header=""
         description={vid.description}
         image={vid.image}
-        link={vid.videoLink}
+        minutes={vid.minutes}
         onClick={() => onClickHandler(vid.videoLink)}
       />
     );
