@@ -28,7 +28,6 @@ function App() {
     await Auth.signOut();
     window.location.href = "/";
   };
-  console.log(window.location.pathname);;
   return (
     <Provider store={store}>
       <div className="App">
