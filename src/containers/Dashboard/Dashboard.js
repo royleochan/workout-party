@@ -157,7 +157,6 @@ function Dashboard(props) {
             Workout Party
           </Typography>
           <a
-            a
             href="/"
             onClick={handleLogout}
             style={{ color: "white", textDecoration: "none" }}
