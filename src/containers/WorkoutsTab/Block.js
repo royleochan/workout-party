@@ -29,7 +29,7 @@ export default function MediaCard(props) {
   return (
     <div style={{ padding: "1%" }}>
       <Card className={classes.root}>
-        <CardActionArea onClick={() => props.onClick}>
+        <CardActionArea onClick={props.onClick}>
           <CardMedia
             className={classes.media}
             image={props.image}
