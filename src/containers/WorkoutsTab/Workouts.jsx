@@ -35,27 +35,48 @@ const Workouts = (props) => {
   dispatch(videosActions.getVideosStart());
 
   useEffect(() => {
-    getAllVideos().then((videos) => setVideos(videos));
+    getAllVideos()
+      .then((videos) => {
+        dispatch(videosActions.getVideosSuccess(videos));
+        setVideos(videos);
+      })
+      .catch((error) => dispatch(videosActions.getVideosFail(error)));
   }, []);
 
-  console.log(videos);
-
-  dispatch(videosActions.getVideosSuccess(videos));
+  // console.log(videos);
 
   let blockArray = videos.map((vid) => {
-    return <Block header="" description={vid.description} image={vid.image} />;
+    return (
+      <Block
+        header=""
+        description={vid.description}
+        image={vid.image}
+        link={vid.videoLink}
+      />
+    );
   });
 
   let filteredArray = filteredVideos.map((vid) => {
-    return <Block header="" description={vid.description} image={vid.image} />;
+    return (
+      <Block
+        header=""
+        description={vid.description}
+        image={vid.image}
+        link={vid.videoLink}
+      />
+    );
   });
+
+  if (filteredArray.length == 0) {
+    filteredArray = <h2>No Videos Found! Search Is Case Sensitive</h2>;
+  }
 
   return (
     <div>
       <div style={{ padding: "2%" }}>
         <SearchBar
           style={{ width: "30%" }}
-          placeholder="Search for workouts..."
+          placeholder="Search For Workouts..."
           value={searchValue}
           onChange={(event) => setSearchValue(event)}
           onRequestSearch={() => searchHandler(searchValue)}
