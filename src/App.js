@@ -33,6 +33,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Router>
+          { !window.location.pathname === "/" && 
           <header className="App-header">
             <div>
               <nav>
@@ -69,7 +70,7 @@ function App() {
               </nav>
             </div>
           </header>
-
+          } 
           <div>
             <Switch>
               <Route path="/exercise">
