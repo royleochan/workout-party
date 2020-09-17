@@ -15,7 +15,8 @@ const searchFunction = (videos, keyword) => {
   let result = videos.filter((vid) => {
     return vid.description.includes(keyword);
   });
-  console.log(result);
+
+  // console.log(result);
   return result;
 };
 
