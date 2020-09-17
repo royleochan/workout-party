@@ -6,7 +6,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 class CustomLayout extends React.Component {
     render() {
-        console.log(!window.location.pathname === "/")
     return (
         <div>
         { window.location.pathname !== "/" 

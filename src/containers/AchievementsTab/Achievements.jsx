@@ -75,7 +75,7 @@ const Achievements = (props) => {
   );
 
   return (
-    <div style={{ backgroundColor: "#101010" }}>
+    <div style={{ backgroundColor: "#081018", paddingLeft:"3%"}}>
       <br />
       <h1 style={{ textAlign: "left", color: "white" }}>Unlocked (4)</h1>
       <hr style={{ borderTop: "3px double #E2B254" }} />

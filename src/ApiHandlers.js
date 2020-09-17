@@ -32,8 +32,6 @@ export function getUserInfo() {
 export function addWorkoutToUser(currentHistory, newWorkoutId, noOfWorkouts) {
   return API.put("workout-party", "/user_info/add_workout", {
     body: {
-      current: currentHistory, // workoutHistory field in user-info
-      workout: newWorkoutId, // id when creating new past workout
       noOfWorkouts: noOfWorkouts, // noOfWorkouts field in user-info
     },
   });
@@ -50,9 +48,9 @@ export function changeUserPic(image_url) {
 // API functions for past-workouts
 
 export function createPastWorkout(date, participants, videoDesc, videoLink) {
-  return API.post("workout-party", `/past_workouts/`, {
+  return API.post("workout-party", `/past_workouts`, {
     body: {
-      date: date, // String of date
+      workoutDate: date, // String of date
       participants: participants, // array of names (String)
       videoDesc: videoDesc, // String
       videoLink: videoLink, // String
@@ -64,10 +62,16 @@ export function getPastWorkout(id) {
   return API.get("workout-party", `/past_workouts/${id}`, {});
 }
 
+export function updatePastWorkout(id, workout) {
+  return API.put("workout-party", `/past_workouts/${id}`, {
+    body: workout,
+  });
+}
+
 // API functions for videos
 
 export function getAllVideos() {
-  return API.get("workout-party", `/get_all_videos`);
+  return API.get("workout-party", `/get_all_videos`, {});
 }
 
 // API functions for workout-history-data
@@ -83,18 +87,18 @@ export function getWorkoutHistory() {
 export function updateWorkoutHistory(newWorkout, currentHistory) {
   return API.put("workout-party", "/workout_history", {
     body: {
-      first: currentHistory.first,
-      second: currentHistory.second,
-      third: currentHistory.third,
-      fourth: currentHistory.fourth,
+      a: currentHistory.a || "",
+      b: currentHistory.b || "",
+      c: currentHistory.c || "",
+      d: currentHistory.d || "",
+      n: newWorkout,
       size: currentHistory.size,
-      new: newWorkout,
     },
   });
 }
 
 export function getJitsiRoom(id) {
-  return API.get("workout-party", `/get_jitsi_room/${id}`);
+  return API.get("workout-party", `/get_jitsi_room/${id}`, {});
 }
 
 export function createJitsiRoom(roomId, videoLink) {
