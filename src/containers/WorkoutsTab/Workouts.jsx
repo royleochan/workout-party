@@ -10,6 +10,7 @@ import { getAllVideos, createJitsiRoom, updateJitsiRoom } from "ApiHandlers";
 import * as videosActions from "store/actions/videos";
 import * as jitsiActions from "store/actions/jitsi";
 import { Divider } from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 const searchFunction = (videos, keyword) => {
   let result = videos.filter((vid) => {
@@ -25,6 +26,7 @@ const Workouts = (props) => {
   const [filteredVideos, setfilteredVideos] = useState([]);
   const [isFiltered, setisFiltered] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
   const jitsiState = useSelector((state) => state.jitsi);
 
   const onClickHandler = (videoLink) => {
@@ -36,6 +38,7 @@ const Workouts = (props) => {
       dispatch(jitsiActions.jitsiSuccess(videoLink));
       updateJitsiRoom(jitsiState.roomName, videoLink);
     }
+      history.push("/exercise");
   };
 
   const searchHandler = (keyword) => {
