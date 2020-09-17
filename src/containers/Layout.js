@@ -8,7 +8,7 @@ class CustomLayout extends React.Component {
     render() {
     return (
         <div>
-        { !window.location.pathname === "/" 
+        { window.location.pathname !== "/" 
                 ?
         <Dashboard child={this.props.children}/>
             :
