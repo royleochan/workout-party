@@ -64,7 +64,7 @@ export function getPastWorkout(id) {
 
 export function updatePastWorkout(id, workout) {
   return API.put("workout-party", `/past_workouts/${id}`, {
-    body: workout
+    body: workout,
   });
 }
 
@@ -92,8 +92,8 @@ export function updateWorkoutHistory(newWorkout, currentHistory) {
       c: currentHistory.c || "",
       d: currentHistory.d || "",
       n: newWorkout,
-      size: currentHistory.size
-    }
+      size: currentHistory.size,
+    },
   });
 }
 
@@ -104,8 +104,8 @@ export function getJitsiRoom(id) {
 export function createJitsiRoom(roomId, videoLink) {
   return API.post("workout-party", "/create_jitsi_room", {
     body: {
-        roomId: roomId,
-        video: videoLink
+      roomId: roomId,
+      video: videoLink,
     },
   });
 }
