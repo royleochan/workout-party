@@ -32,7 +32,7 @@ const Workouts = (props) => {
 
   const onClickHandler = (videoLink) => {
     if (jitsiState.roomName == "") {
-      const roomName = uuidv4();
+      const roomName = uuidv4().substr(0,6);
       dispatch(jitsiActions.jitsiStart(roomName, videoLink));
       createJitsiRoom(roomName, videoLink);
     } else {

@@ -30,14 +30,14 @@ export default class Countdown2 extends React.Component {
             <div>
                 <div className='countdown-wrapper'>
                         <div className='countdown-item'>
-                            <SVGCircle radius={minutesRadius} />
-                            {minutes} 
-                            <span>minutes</span>
+                            <SVGCircle style={{color:"white"}} radius={minutesRadius} />
+                            <text style={{color:"white"}}> {minutes} </text>
+                            <span style={{color:"white"}}>minutes</span>
                         </div>
-                        <div className='countdown-item'>
-                            <SVGCircle radius={secondsRadius} />
-                            {seconds} 
-                            <span>seconds</span>
+                        <div className='countdown-item' >
+                            <SVGCircle style={{color:"white"}} radius={secondsRadius} />
+                            <text style={{color:"white"}}> {seconds} </text>
+                            <span style={{color:"white"}}>seconds</span>
                         </div>
                 </div>
             </div>
@@ -46,8 +46,8 @@ export default class Countdown2 extends React.Component {
 }
 
 const SVGCircle = ({ radius }) => (
-    <svg className='countdown-svg'>
-        <path fill="none" stroke="#333" stroke-width="4" d={describeArc(50, 50, 48, 0, radius)}/>
+    <svg className='countdown-svg' style={{color:"white"}} >
+        <path fill="none" stroke="white" stroke-width="4" d={describeArc(50, 50, 48, 0, radius)}/>
     </svg>
 );
 
