@@ -14,7 +14,7 @@ const fakeProfile = {
   image_url:
     "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
   bg_image_url:
-    "https://www.solidbackgrounds.com/images/2560x1440/2560x1440-davys-grey-solid-color-background.jpg",
+    "https://www.solidbackgrounds.com/images/950x350/950x350-davys-grey-solid-color-background.jpg",
 };
 
 const fakeHistory = [
