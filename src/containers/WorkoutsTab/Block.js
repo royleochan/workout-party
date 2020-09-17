@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -22,15 +24,16 @@ export default function MediaCard(props) {
   const classes = useStyles();
   // const isDesktop = useMediaQuery("min-width: 600px", "min-height: 600px");
 
+  const clickedHandler = (videoLink) => {};
+
   return (
     <div style={{ padding: "1%" }}>
       <Card className={classes.root}>
-        <CardActionArea>
+        <CardActionArea onClick={() => console.log("clicked!")}>
           <CardMedia
             className={classes.media}
-            // image={`${props.image}`}
             image={props.image}
-            title="Contemplative Reptile"
+            title="Workout Party"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
