@@ -4,67 +4,72 @@ import { CustomJutsu } from "./CustomJutsu";
 import { useHistory } from "react-router-dom";
 import Countdown from "react-countdown";
 import Countdown2 from "./Countdown2";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import { useDispatch, useSelector } from "react-redux";
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import {useDispatch, useSelector} from "react-redux";
+import { Auth } from "aws-amplify";
 
 const Exercise = (props) => {
+    const [username, setUsername] = useState("");
   const [time, setTime] = useState(Date.now() + 0);
   const history = useHistory();
   const jitsiState = useSelector((state) => state.jitsi);
   const hasRoom = jitsiState.roomName != "" && jitsiState.videoLink != "";
 
-  const handleSubmit = (e) => {
-    setTime(
-      Date.now() +
-        (parseInt(e.target.min.value) * 60 + parseInt(e.target.sec.value)) *
-          1000
+    const handleSubmit = (e) => {
+        setTime(
+            Date.now() +
+            (parseInt(e.target.min.value) * 60 + parseInt(e.target.sec.value)) *
+            1000
+        );
+    };
+    useEffect(()=> {
+        Auth.currentUserInfo().then(userInfo => setUsername(userInfo.attributes.name)) ;
+    },[])
+
+    const Completionist = () => (
+        <form onSubmit={handleSubmit}>
+            <input
+                class="input-box"
+                name="min"
+                type="number"
+                placeholder="Minutes"
+            ></input>
+            :
+            <input
+                class="input-box"
+                name="sec"
+                type="number"
+                placeholder="Seconds"
+            ></input>
+            <button
+                type="submit"
+                style={{
+                    backgroundColor: "transparent",
+                    color: "white",
+                    marginLeft: "10px",
+                }}
+            >
+                <PlayArrowIcon/>
+            </button>
+        </form>
     );
-  };
 
-  const Completionist = () => (
-    <form onSubmit={handleSubmit}>
-      <input
-        class="input-box"
-        name="min"
-        type="number"
-        placeholder="Minutes"
-      ></input>
-      :
-      <input
-        class="input-box"
-        name="sec"
-        type="number"
-        placeholder="Seconds"
-      ></input>
-      <button
-        type="submit"
-        style={{
-          backgroundColor: "transparent",
-          color: "white",
-          marginLeft: "10px",
-        }}
-      >
-        <PlayArrowIcon />
-      </button>
-    </form>
-  );
+    const renderer = ({ minutes, seconds, completed }) => {
+        if (completed) {
+            // Render a completed state
+            return <Completionist />;
+        } else {
+            // Render a countdown
+            return <Countdown2 minutes={minutes} seconds={seconds} />;
+        }
+    };
 
-  const renderer = ({ minutes, seconds, completed }) => {
-    if (completed) {
-      // Render a completed state
-      return <Completionist />;
-    } else {
-      // Render a countdown
-      return <Countdown2 minutes={minutes} seconds={seconds} />;
-    }
-  };
-
-  const clockRef = useRef();
-  const handlePause = () => {
-    clockRef.current.isPaused()
-      ? clockRef.current.start()
-      : clockRef.current.pause();
-  };
+    const clockRef = useRef();
+    const handlePause = () => {
+        clockRef.current.isPaused()
+            ? clockRef.current.start()
+            : clockRef.current.pause();
+    };
 
   return (
     <div
@@ -170,7 +175,7 @@ const Exercise = (props) => {
           <div style={{ height: 50 }} />
           <CustomJutsu
             roomName={jitsiState.roomName}
-            displayName={""}
+            displayName={username}
             password={jitsiState.roomName}
             loadingComponent={<p>Racking up the weights</p>}
             containerStyles={{ width: "100%", height: "800px" }}
