@@ -29,6 +29,7 @@ function App() {
     window.location.href = "/";
   };
   console.log(window.location.pathname);
+  console.log(window.location.pathname === "/");
   return (
     <Provider store={store}>
       <div className="App">
