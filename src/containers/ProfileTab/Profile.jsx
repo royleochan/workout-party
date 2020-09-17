@@ -3,7 +3,7 @@ import "./Profile.scss";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Collapse, Divider } from "antd";
 import { Storage } from "aws-amplify";
-import {changeUserPic, getPastWorkout, getStats, getUserInfo, getWorkoutHistory} from "../../ApiHandlers";
+import {changeUserPic, getPastWorkout, getStats, getUserInfo, gethistory, getWorkoutHistory} from "../../ApiHandlers";
 import {s3Upload} from "../../libs/awsLib";
 import {useHistory} from "react-router-dom";
 
@@ -45,25 +45,65 @@ const fakeHistory = [
 ];
 
 const Profile = (props) => {
-  const history = useHistory();
   const [userPic, setPic] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const [userStats, setStats] = useState([]);
   const [userInfo, setInfo] = useState([]);
-  const [workoutHistory, setHist] = useState([]);
+  const [workoutHist, setHist] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  async function getHistories(hist) {
+    const result = [];
+    try {
+      if (hist.size > 0) {
+        getPastWorkout(hist.a)
+            .then(data => result.push(data))
+            .then(() => {
+              setHist(result);
+              setLoading(false);
+            });
+      } else {
+        setLoading(false);
+      }
+      // if (hist.second) {
+      //   getPastWorkout(hist.second)
+      //       .then(data => result.push(data));
+      // }
+      // if (hist.third) {
+      //   getPastWorkout(hist.third)
+      //       .then(data => result.push(data));
+      // }
+      // if (hist.fourth) {
+      //   getPastWorkout(hist.fourth)
+      //       .then(data => result.push(data));
+      // }
+      // if (hist.fifth) {
+      //   getPastWorkout(hist.fifth)
+      //       .then(data => result.push(data));
+      // }
+
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  }
+
   useEffect(() => {
-    Promise.all([
-      getStats().then(stats => setStats(stats)),
-      // getWorkoutHistory().then(hist => setHist(hist)),
-      getUserInfo().then(info => {
-        setInfo(info);
-        if (info.profilePic) {
-          Promise.resolve(Storage.get(info.profilePic, { level: 'protected' }))
+    try {
+      Promise.all([
+        getStats().then(stats => setStats(stats)),
+        getWorkoutHistory().then(hist => getHistories(hist)),
+        getUserInfo().then(info => {
+          setInfo(info);
+          if (info.profilePic) {
+            Storage.get(info.profilePic, { level: 'protected' })
               .then(url => setPic(url.toString()));
-        }
-      })
-    ]).then(() => setLoading(false));
+          }
+        })
+      ])
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
   }, [])
 
   const acceptedTypes = [
@@ -74,13 +114,23 @@ const Profile = (props) => {
 
   function handleUpload(file) {
     try {
-      Promise.resolve(s3Upload(file))
+      s3Upload(file)
           .then(pic => changeUserPic(pic))
+          .then(() => {
+            getUserInfo().then(info => {
+              setLoading(true);
+              setInfo(info);
+              Storage.get(info.profilePic, { level: 'protected' })
+                  .then(url => setPic(url.toString()))
+                  .then(() => setLoading(false));
+            })
+          })
     } catch (error) {
       console.log(error);
       alert(error.message);
     }
   }
+
   return (
     !isLoading &&
     <div className="profile">
@@ -120,9 +170,6 @@ const Profile = (props) => {
             <p className="profile-name-text">{userInfo.name}</p>
           </li>
         </ul>
-        <p className="profile-info">
-          {userInfo.name} has completed {userInfo.noOfWorkouts} workouts.
-        </p>
         <Divider className="line" />
         <div>
           <div className="progress-row">
@@ -178,98 +225,22 @@ const Profile = (props) => {
         </div>
         <div className="history-view">
           <p className="history-header-text">Workout History:</p>
-          {workoutHistory &&
+          {workoutHist &&
           <Collapse className="history-list" accordion>
-            {workoutHistory.first &&
-            Promise.resolve(getPastWorkout(workoutHistory.first))
-                .then(history => {
-                  return (
-                      <Panel
-                          className="history-panel"
-                          header={history.date}
-                      >
-                        <div className="participants-div">
-                          <p>Participants:</p>
-                          <p>{history.participants}</p>
-                        </div>
-                        <p>{history.videoDesc}</p>
-                        <p>{history.videoLink}</p>
-                      </Panel>
-                  )
-                })
-            }
-            {workoutHistory.second &&
-            Promise.resolve(getPastWorkout(workoutHistory.second))
-                .then(history => {
-                  return (
-                      <Panel
-                          className="history-panel"
-                          header={history.date}
-                      >
-                        <div className="participants-div">
-                          <p>Participants:</p>
-                          <p>{history.participants}</p>
-                        </div>
-                        <p>{history.videoDesc}</p>
-                        <p>{history.videoLink}</p>
-                      </Panel>
-                  )
-                })
-            }
-            {workoutHistory.third &&
-            Promise.resolve(getPastWorkout(workoutHistory.third))
-                .then(history => {
-                  return (
-                      <Panel
-                          className="history-panel"
-                          header={history.date}
-                      >
-                        <div className="participants-div">
-                          <p>Participants:</p>
-                          <p>{history.participants}</p>
-                        </div>
-                        <p>{history.videoDesc}</p>
-                        <p>{history.videoLink}</p>
-                      </Panel>
-                  )
-                })
-            }
-            {workoutHistory.fourth &&
-            Promise.resolve(getPastWorkout(workoutHistory.fourth))
-                .then(history => {
-                  return (
-                      <Panel
-                          className="history-panel"
-                          header={history.date}
-                      >
-                        <div className="participants-div">
-                          <p>Participants:</p>
-                          <p>{history.participants}</p>
-                        </div>
-                        <p>{history.videoDesc}</p>
-                        <p>{history.videoLink}</p>
-                      </Panel>
-                  )
-                })
-            }
-            {workoutHistory.fifth &&
-            Promise.resolve(getPastWorkout(workoutHistory.fifth))
-                .then(history => {
-                  return (
-                      <Panel
-                          className="history-panel"
-                          header={history.date}
-                      >
-                        <div className="participants-div">
-                          <p>Participants:</p>
-                          <p>{history.participants}</p>
-                        </div>
-                        <p>{history.videoDesc}</p>
-                        <p>{history.videoLink}</p>
-                      </Panel>
-                  )
-                })
-            }
+            {workoutHist.map((hist, index) =>
+                <Panel
+                    className="history-panel"
+                    header={hist.workoutDate}
+                    key={index}
+                >
+                  <div className="participants-div">
+                    <p>Participants:</p>
+                    <p>{hist.participants}</p>
+                  </div>
+                  <p>{hist.videoDesc}</p>
+                  <p>{hist.videoLink}</p>
+                </Panel>
+            )}
           </Collapse>
           }
         </div>
