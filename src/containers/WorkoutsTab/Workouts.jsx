@@ -28,7 +28,6 @@ const Workouts = (props) => {
   const jitsiState = useSelector((state) => state.jitsi);
 
   const onClickHandler = (videoLink) => {
-    console.log("clicked");
     if (jitsiState.roomName == "") {
       const roomName = uuidv4();
       dispatch(jitsiActions.jitsiStart(roomName, videoLink));
@@ -68,7 +67,7 @@ const Workouts = (props) => {
         description={vid.description}
         image={vid.image}
         link={vid.videoLink}
-        onClick={onClickHandler(vid.videoLink)}
+        onClick={() => onClickHandler(vid.videoLink)}
       />
     );
   });

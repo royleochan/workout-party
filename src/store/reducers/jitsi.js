@@ -15,6 +15,7 @@ const jitsiStart = (state, action) => {
   return updateObject(state, {
     loading: true,
     roomName: action.roomName,
+    video: action.video,
   });
 };
 
