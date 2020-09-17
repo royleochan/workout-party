@@ -9,7 +9,7 @@ class CustomLayout extends React.Component {
         console.log(!window.location.pathname === "/")
     return (
         <div>
-        { window.location.pathname !== "/" 
+        { !["/","/victory"].contains(window.location.pathname)
                 ?
         <Dashboard child={this.props.children}/>
             :
