@@ -88,7 +88,23 @@ export function updateWorkoutHistory(newWorkout, currentHistory) {
       third: currentHistory.third,
       fourth: currentHistory.fourth,
       size: currentHistory.size,
-      new: newWorkout
-    }
+      new: newWorkout,
+    },
+  });
+}
+
+export function getJitsiRoom(id) {
+  return API.get(`workout-party, /get_jitsi_room/${id}`);
+}
+
+export function createJitsiRoom() {
+  return API.post("workout-party", "/create_jitsi_room", {});
+}
+
+export function updateJitsiRoom(id, videoLink) {
+  return API.put("workout-party", "/workout_history", {
+    body: {
+      video: videoLink,
+    },
   });
 }
