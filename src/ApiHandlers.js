@@ -94,7 +94,7 @@ export function updateWorkoutHistory(newWorkout, currentHistory) {
 }
 
 export function getJitsiRoom(id) {
-  return API.get(`workout-party, /get_jitsi_room/${id}`);
+  return API.get("workout-party", `/get_jitsi_room/${id}`);
 }
 
 export function createJitsiRoom() {
@@ -102,7 +102,7 @@ export function createJitsiRoom() {
 }
 
 export function updateJitsiRoom(id, videoLink) {
-  return API.put("workout-party", "/workout_history", {
+  return API.put("workout-party", `/update_jitsi_room/${id}`, {
     body: {
       video: videoLink,
     },
