@@ -33,7 +33,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Router>
-          { !window.location.pathname === "https://master.d11c0qcu4nq28k.amplifyapp.com/" && 
+          { !window.location.pathname === "/" && 
           <header className="App-header">
             <div>
               <nav>
