@@ -6,7 +6,6 @@ const initialState = {
   video: "",
   roomName: "",
   minutes: 0,
-  ended: false,
   error: null,
 };
 
@@ -22,15 +21,13 @@ const jitsiStart = (state, action) => {
 
 const jitsiSuccess = (state, action) => {
   return updateObject(state, {
-    videos: action.videos,
-    loading: false,
+    video: action.video,
   });
 };
 
 const jitsiFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false,
   });
 };
 
