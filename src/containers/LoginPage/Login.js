@@ -38,7 +38,7 @@ const Login = () => {
           true
         )
       );
-      history.push("/home");
+      window.location.href = "/home";
     } catch (error) {
       console.log(error);
       alert(error.message);
@@ -238,8 +238,9 @@ const Login = () => {
       <div style={{ float: "right", width: "50%", marginTop: "17%" }}>
         <h1
           style={{
+            fontFamily:"Chalkduster",
             fontWeight: "400",
-            fontSize: "96px",
+            fontSize: "80px",
             color: "white",
           }}
         >
