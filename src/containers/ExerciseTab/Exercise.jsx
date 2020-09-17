@@ -4,6 +4,7 @@ import { CustomJutsu } from "./CustomJutsu";
 import { useHistory } from "react-router-dom";
 import Countdown from "react-countdown";
 import Countdown2 from "./Countdown2";
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const Exercise = (props) => {
   const [time, setTime] = useState(Date.now() + 0);
@@ -35,12 +36,12 @@ const Exercise = (props) => {
       <button
         type="submit"
         style={{
-          backgroundColor: "#E2B254",
+          backgroundColor: "transparent",
           color: "white",
           marginLeft: "10px",
         }}
       >
-        START
+        <PlayArrowIcon/>
       </button>
     </form>
   );
@@ -51,8 +52,6 @@ const Exercise = (props) => {
       return <Completionist />;
     } else {
       // Render a countdown
-      console.log(minutes);
-      console.log(seconds);
       return <Countdown2 minutes={minutes} seconds={seconds} />;
     }
   };
@@ -89,35 +88,43 @@ const Exercise = (props) => {
             justifyContent: "center",
           }}
         >
-          <h3 style={{ padding: 10, color: "white" }}>TIMER</h3>
-          <Countdown date={time} renderer={renderer} ref={clockRef} />
+          <h3 style={{ fontFamily:"Impact", fontSize:"40px", padding: 10, color: "white" }}>Timer</h3>
+          <Countdown date={time} renderer={renderer} ref={clockRef} autoStart = {true}/>
           <br></br>
           <button
             class="time-home"
             style={{
-              marginLeft: "10%",
+              marginRight: "5%",
+              marginLeft:"5%",
               backgroundColor: "#E2B254",
               color: "white",
+              fontFamily:"arial",
+              fontSize:"20px",
+              borderRadius:"30px"
             }}
             variant="contained"
             type="submit"
             onClick={handlePause}
           >
-            PAUSE/RESUME
+            Pause / Resume
           </button>
           <br></br>
           <button
             class="time-home"
             style={{
-              marginLeft: "10%",
+              marginRight: "5%",
+              marginLeft:"5%",
               backgroundColor: "#E2B254",
               color: "white",
+              fontFamily:"arial",
+              fontSize:"20px",
+              borderRadius:"30px"
             }}
             variant="contained"
             type="submit"
             onClick={() => setTime(0)}
           >
-            RESET
+            Reset
           </button>
         </div>
       </div>
