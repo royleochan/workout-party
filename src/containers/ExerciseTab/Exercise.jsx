@@ -98,6 +98,7 @@ const Exercise = (props) => {
               marginLeft:"5%",
               backgroundColor: "#E2B254",
               color: "white",
+              fontWeight:"bold",
               fontFamily:"arial",
               fontSize:"20px",
               borderRadius:"30px"
@@ -116,6 +117,7 @@ const Exercise = (props) => {
               marginLeft:"5%",
               backgroundColor: "#E2B254",
               color: "white",
+              fontWeight:"bold",
               fontFamily:"arial",
               fontSize:"20px",
               borderRadius:"30px"
