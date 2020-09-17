@@ -34,6 +34,7 @@ function App() {
         <Router>
           <header className="App-header">
             <div>
+              { !window.location.pathname === "/" && 
               <nav>
                 <ul className="nav-bar">
                   <li className="nav-item">
@@ -66,6 +67,7 @@ function App() {
                   </li>
                 </ul>
               </nav>
+              }
             </div>
           </header>
           <div>
