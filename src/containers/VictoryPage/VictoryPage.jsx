@@ -123,11 +123,29 @@ const VictoryPage = (props) => {
             </ProgressBar>
           </div>
         </div>
-        <button
-            onClick={postWorkout}
-        >
-          Done
-        </button>
+        <div className="stat-container">
+          <button
+              onClick={postWorkout}
+              style={{
+                marginRight: "5%",
+                marginLeft: "5%",
+                backgroundColor: "#E2B254",
+                color: "white",
+                fontWeight: "bold",
+                fontFamily: "Montserrat, sans-serif",
+                fontSize: "16px",
+                borderRadius: "30px",
+                display: "flex",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+                height: "40px",
+                alignItems: "center",
+                alignSelf: "center"
+              }}
+          >
+            Done
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -49,6 +49,9 @@
       .text-container {
         width: 6rem;
         animation: fadein 2s;
+        p {
+          font-family: Montserrat, sans-serif;
+        }
       }
 
       .progress-container {

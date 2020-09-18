@@ -189,6 +189,7 @@ const Exercise = (props) => {
             height: "90vh",
             flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center"
           }}
         >
           <h3
@@ -212,6 +213,11 @@ const Exercise = (props) => {
               fontFamily: "Montserrat, sans-serif",
               fontSize: "20px",
               borderRadius: "30px",
+              display: "flex",
+              paddingLeft: "20px",
+              paddingRight: "20px",
+              height: "40px",
+              alignItems: "center"
             }}
             variant="contained"
             type="submit"
@@ -219,7 +225,7 @@ const Exercise = (props) => {
               history.push("/workouts");
             }}
           >
-            Click here to choose workout!
+            Click here to choose a workout!
           </button>
         </div>
       )}
