@@ -90,7 +90,7 @@ const Login = () => {
         createUserInfo(userInfo.attributes.name),
         createWorkoutHistory(),
       ]).then(() => {
-        history.push("/home");
+        window.location.href = "/home";
       });
     } catch (error) {
       alert(error.message);
