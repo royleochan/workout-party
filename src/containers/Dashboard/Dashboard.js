@@ -136,7 +136,7 @@ function Dashboard(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography style = {{fontFamily:"Chalkduster",fontWeight:"bold",fontSize:"30px"}} component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography style = {{fontWeight:"bold",fontSize:"30px"}} component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Workout Party
           </Typography>
           <a a href="/" onClick = {handleLogout} style={{color:"white",textDecoration:"none"}}>
