@@ -1,0 +1,6 @@
+.video {
+    display:flex;
+    height:23vw;
+    width:40vw;
+    align-self:center;
+}

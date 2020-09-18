@@ -1,75 +1,81 @@
 import React, { useEffect, useRef, useState } from "react";
-import WorkoutVideo from "./video.png";
 import { CustomJutsu } from "./CustomJutsu";
 import { useHistory } from "react-router-dom";
-import Countdown from "react-countdown";
-import Countdown2 from "./Countdown2";
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import {useDispatch, useSelector} from "react-redux";
 import { Auth } from "aws-amplify";
+import Reactpip from 'react-picture-in-picture'
+import './video.css';
+import { Storage } from "aws-amplify";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import Typography from '@material-ui/core/typography'
+import { withStyles } from '@material-ui/core/styles';
 
 const Exercise = (props) => {
-    const [username, setUsername] = useState("");
-  const [time, setTime] = useState(Date.now() + 0);
+  const [username, setUsername] = useState("");
   const history = useHistory();
   const jitsiState = useSelector((state) => state.jitsi);
-  const hasRoom = jitsiState.roomName != "" && jitsiState.videoLink != "";
+  const hasRoom = jitsiState.roomName != "" && jitsiState.video != "";
+  const[active, setActive] = useState(false);
+  const [video, setVideo] = useState("");
+  
+  const IOSSwitch = withStyles((theme) => ({
+    root: {
+      width: 42,
+      height: 26,
+      padding: 0,
+      margin: theme.spacing(1),
+    },
+    switchBase: {
+      padding: 1,
+      '&$checked': {
+        transform: 'translateX(16px)',
+        color: theme.palette.common.white,
+        '& + $track': {
+          backgroundColor: 'orange',
+          opacity: 1,
+          border: 'none',
+        },
+      },
+      '&$focusVisible $thumb': {
+        color: '#52d869',
+        border: '6px solid #fff',
+      },
+    },
+    thumb: {
+      width: 24,
+      height: 24,
+    },
+    track: {
+      borderRadius: 26 / 2,
+      border: `1px solid ${theme.palette.grey[400]}`,
+      backgroundColor: '#A0A0A0',
+      opacity: 1,
+      transition: theme.transitions.create(['background-color', 'border']),
+    },
+    checked: {},
+    focusVisible: {},
+  }))(({ classes, ...props }) => {
+    return (
+      <Switch
+        focusVisibleClassName={classes.focusVisible}
+        disableRipple
+        classes={{
+          root: classes.root,
+          switchBase: classes.switchBase,
+          thumb: classes.thumb,
+          track: classes.track,
+          checked: classes.checked,
+        }}
+        {...props}
+      />
+    );
+  });
 
-    const handleSubmit = (e) => {
-        setTime(
-            Date.now() +
-            (parseInt(e.target.min.value) * 60 + parseInt(e.target.sec.value)) *
-            1000
-        );
-    };
     useEffect(()=> {
         Auth.currentUserInfo().then(userInfo => setUsername(userInfo.attributes.name)) ;
+        Storage.get(jitsiState.video, { level: 'public' }).then(url => setVideo(url.toString()))
     },[])
-
-    const Completionist = () => (
-        <form onSubmit={handleSubmit}>
-            <input
-                class="input-box"
-                name="min"
-                type="number"
-                placeholder="Minutes"
-            ></input>
-            :
-            <input
-                class="input-box"
-                name="sec"
-                type="number"
-                placeholder="Seconds"
-            ></input>
-            <button
-                type="submit"
-                style={{
-                    backgroundColor: "transparent",
-                    color: "white",
-                    marginLeft: "10px",
-                }}
-            >
-                <PlayArrowIcon/>
-            </button>
-        </form>
-    );
-
-    const renderer = ({ minutes, seconds, completed }) => {
-        if (completed) {
-            // Render a completed state
-            return <Completionist />;
-        } else {
-            // Render a countdown
-            return <Countdown2 minutes={minutes} seconds={seconds} />;
-        }
-    };
-
-    const clockRef = useRef();
-    const handlePause = () => {
-        clockRef.current.isPaused()
-            ? clockRef.current.start()
-            : clockRef.current.pause();
-    };
 
   return (
     <div
@@ -83,104 +89,51 @@ const Exercise = (props) => {
     >
       {hasRoom ? (
         <>
-          <div style={{ height: 100 }} />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <iframe
-              width="560"
-              height="315"
-              src={jitsiState.video}
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: "Montserrat, sans-serif",
-                  fontSize: "40px",
-                  padding: 10,
-                  color: "white",
-                }}
-              >
-                Timer
-              </h3>
-              <Countdown
-                date={time}
-                renderer={renderer}
-                ref={clockRef}
-                autoStart={true}
-              />
-              <br></br>
-              <button
-                className="time-home"
-                style={{
-                  marginRight: "5%",
-                  marginLeft: "5%",
-                  backgroundColor: "#E2B254",
-                  color: "white",
-                  fontWeight: "bold",
-                  fontFamily: "Montserrat, sans-serif",
-                  fontSize: "20px",
-                  borderRadius: "30px",
-                }}
-                variant="contained"
-                type="submit"
-                onClick={handlePause}
-              >
-                Pause / Resume
-              </button>
-              <br></br>
-              <button
-                className="time-home"
-                style={{
-                  marginRight: "5%",
-                  marginLeft: "5%",
-                  backgroundColor: "#E2B254",
-                  color: "white",
-                  fontWeight: "bold",
-                  fontFamily: "Montserrat, sans-serif",
-                  fontSize: "20px",
-                  borderRadius: "30px",
-                }}
-                variant="contained"
-                type="submit"
-                onClick={() => setTime(0)}
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-          <div style={{ height: 50 }} />
           <h3
             style={{
+              float:"right",
+              textAlign:"right",
+              position :"relative",
+              top:"50px",
+              right:"50px",
               fontFamily: "Montserrat, sans-serif",
-              fontSize: "40px",
-              padding: 10,
+              fontSize: "30px",
               color: "white",
             }}
           >
             Room ID : {jitsiState.roomName}
           </h3>
-          <div style={{ height: 50 }} />
+          <Reactpip isActive= {active} className="video">
+          { video != "" &&
+          <source src={video}/>
+          }
+        </Reactpip>
+
+        <div style={{alignSelf:"center"}}>
+        <FormControlLabel
+        style={{color:"white",fontSize:"3vh",marginTop:"20px"}}
+        control={
+          <IOSSwitch
+            checked={active}
+            onChange={() => setActive(!active)}
+            name="checkedB"
+            color="primary"
+          />
+        }
+        label={<Typography style={{fontSize:"20px"}}>Toggle Picture in Picture</Typography>}
+      />
+      </div>
+        
+
+          <div style={{ height: 20 }} />
           <CustomJutsu
             roomName={jitsiState.roomName}
             displayName={username}
             password={jitsiState.roomName}
             loadingComponent={<p>Racking up the weights</p>}
             containerStyles={{ width: "100%", height: "800px" }}
-            onMeetingEnd={() => history.push("/victory")}
+            onMeetingEnd={() => {
+              window.location.href = "/victory"}}
           />
         </>
       ) : (
