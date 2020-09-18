@@ -24,19 +24,21 @@ const Home = () => {
 
   return (
     <div className="home-body">
-        <input
-            className="id-home"
-            align="center"
-            placeholder="Enter Room ID"
-            onChange={e => setRoomId(e.target.value)}
-            value={roomId}
-        />
-        <button className="submit-home" align="center" onClick={joinRoom}>
-            Join Room
+        <div>
+            <input
+                className="id-home"
+                align="center"
+                placeholder="Enter Room ID"
+                onChange={e => setRoomId(e.target.value)}
+                value={roomId}
+            />
+            <button className="submit-home" align="center" onClick={joinRoom}>
+                Join Room
+            </button>
+        </div>
+        <button className="submit-home2" onClick={createRoom} align="center">
+            Create New Room
         </button>
-      <button className="submit-home2" onClick={createRoom} align="center">
-        Create New Room
-      </button>
     </div>
   );
 };

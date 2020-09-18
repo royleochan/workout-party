@@ -78,6 +78,7 @@ const Exercise = (props) => {
         flexDirection: "column",
         alignContent: "center",
         backgroundColor: "#081018",
+        minHeight: "100vh"
       }}
     >
       {hasRoom ? (
@@ -192,16 +193,15 @@ const Exercise = (props) => {
             alignItems: "center"
           }}
         >
-          <h3
+          <p
             style={{
               fontFamily: "Montserrat, sans-serif",
               fontSize: "40px",
-              padding: 10,
               color: "white",
             }}
           >
-            Workout not selected yet
-          </h3>
+            No workout has been selected.
+          </p>
           <button
             className="time-home"
             style={{
