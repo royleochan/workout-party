@@ -8,7 +8,7 @@ import './video.css';
 import { Storage } from "aws-amplify";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/typography'
+import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles';
 
 const Exercise = (props) => {
