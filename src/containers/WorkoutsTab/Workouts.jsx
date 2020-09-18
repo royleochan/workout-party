@@ -104,7 +104,9 @@ const Workouts = (props) => {
         </div>
         <div style={{ marginTop: "2rem" }}>
           <div>
-            <h1 style={{ color: "white" }}>Our Recommended Workouts</h1>
+            <h1 style={{ color: "white" }}>
+              Choose From Our Recommended Workouts
+            </h1>
           </div>
           <div className="workout-container">
             <Divider />
