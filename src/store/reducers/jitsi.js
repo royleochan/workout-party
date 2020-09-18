@@ -5,8 +5,7 @@ import { updateObject } from "../utility";
 const initialState = {
   video: "",
   roomName: "",
-  // loading: false,
-  ended: false,
+  minutes: 0,
   error: null,
 };
 
@@ -15,20 +14,20 @@ const jitsiStart = (state, action) => {
   return updateObject(state, {
     loading: true,
     roomName: action.roomName,
+    video: action.video,
+    minutes: action.minutes,
   });
 };
 
 const jitsiSuccess = (state, action) => {
   return updateObject(state, {
-    videos: action.videos,
-    loading: false,
+    video: action.video,
   });
 };
 
 const jitsiFail = (state, action) => {
   return updateObject(state, {
     error: action.error,
-    loading: false,
   });
 };
 

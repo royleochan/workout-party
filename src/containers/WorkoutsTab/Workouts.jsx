@@ -1,19 +1,21 @@
 import "./Workouts.scss";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 import SearchBar from "material-ui-search-bar";
 import Block from "./Block";
 
-import { getAllVideos } from "ApiHandlers";
+import { getAllVideos, createJitsiRoom, updateJitsiRoom } from "ApiHandlers";
 import * as videosActions from "store/actions/videos";
+import * as jitsiActions from "store/actions/jitsi";
 import { Divider } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const searchFunction = (videos, keyword) => {
   let result = videos.filter((vid) => {
     return vid.description.includes(keyword);
   });
-  console.log(result);
   return result;
 };
 
@@ -23,6 +25,21 @@ const Workouts = (props) => {
   const [filteredVideos, setfilteredVideos] = useState([]);
   const [isFiltered, setisFiltered] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const jitsiState = useSelector((state) => state.jitsi);
+
+  const onClickHandler = (videoLink, minutes) => {
+    if (jitsiState.roomName == "") {
+      const roomName = uuidv4();
+      dispatch(jitsiActions.jitsiStart(roomName, videoLink, minutes));
+      createJitsiRoom(roomName, videoLink);
+    } else {
+      dispatch(jitsiActions.jitsiSuccess(videoLink, minutes));
+      updateJitsiRoom(jitsiState.roomName, videoLink);
+    }
+    history.push("/exercise");
+  };
+
   const searchHandler = (keyword) => {
     if (keyword == "") {
       setisFiltered(false);
@@ -51,7 +68,8 @@ const Workouts = (props) => {
         header=""
         description={vid.description}
         image={vid.image}
-        link={vid.videoLink}
+        minutes={vid.minutes}
+        onClick={() => onClickHandler(vid.videoLink)}
       />
     );
   });
@@ -62,7 +80,8 @@ const Workouts = (props) => {
         header=""
         description={vid.description}
         image={vid.image}
-        link={vid.videoLink}
+        minutes={vid.minutes}
+        onClick={() => onClickHandler(vid.videoLink)}
       />
     );
   });
@@ -83,9 +102,11 @@ const Workouts = (props) => {
             onRequestSearch={() => searchHandler(searchValue)}
           />
         </div>
-        <div style={{marginTop: "2rem"}}>
+        <div style={{ marginTop: "2rem" }}>
           <div>
-            <h1 style={{ color: "white" }}>Our Recommended Workouts</h1>
+            <h1 style={{ color: "white" }}>
+              Choose From Our Recommended Workouts
+            </h1>
           </div>
           <div className="workout-container">
             <Divider />

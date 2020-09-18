@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.scss";
-import {createStats, createUserInfo, createWorkoutHistory} from "../../ApiHandlers"
+import {
+  createStats,
+  createUserInfo,
+  createWorkoutHistory,
+} from "../../ApiHandlers";
 
 import * as authActions from "store/actions/auth";
 
@@ -82,12 +86,12 @@ const Login = () => {
         )
       );
       Promise.all([
-          createStats(),
-          createUserInfo(userInfo.attributes.name),
-          createWorkoutHistory()
+        createStats(),
+        createUserInfo(userInfo.attributes.name),
+        createWorkoutHistory(),
       ]).then(() => {
         history.push("/home");
-      })
+      });
     } catch (error) {
       alert(error.message);
     }
@@ -238,6 +242,7 @@ const Login = () => {
       <div style={{ float: "right", width: "50%", marginTop: "17%" }}>
         <h1
           style={{
+            fontFamily: "Montserrat, sans-serif",
             fontWeight: "400",
             fontSize: "80px",
             color: "white",

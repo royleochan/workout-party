@@ -16,7 +16,7 @@
       padding-bottom: 10px;
       padding-top: 10px;
       margin-right:20%;
-      font-family: 'Ubuntu', sans-serif;
+      font-family: Montserrat, sans-serif;
       font-size: 17px;
       font-weight:bold;
       box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
@@ -32,7 +32,7 @@
       padding-right:20%;
       padding-bottom: 10px;
       padding-top: 10px;
-      font-family: 'Ubuntu', sans-serif;
+      font-family: Montserrat, sans-serif;
       font-size: 17px;
       font-weight:bold;
       box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
@@ -51,5 +51,5 @@
     border: 2px solid rgba(0, 0, 0, 0.02);
     margin: 15% 2% 2% 20%;
     text-align: center;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: Montserrat, sans-serif;
     }

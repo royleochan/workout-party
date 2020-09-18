@@ -13,6 +13,7 @@ import thunk from "redux-thunk";
 //e.g. Of importing reducers
 import authReducer from "./store/reducers/auth";
 import videosReducer from "./store/reducers/videos";
+import jitsiReducer from "./store/reducers/jitsi";
 
 Amplify.configure({
   Auth: {
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   //e.g.
   auth: authReducer,
   videos: videosReducer,
+  jitsi: jitsiReducer,
 });
 
 const store = createStore(
