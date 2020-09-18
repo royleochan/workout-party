@@ -18,12 +18,13 @@ html,body
 }
 
 .background-image {
-  width: 100vw;
-  height: 150px;
+  width: 96vw;
+  height: 200px;
 }
 
 .body {
-  width: 100vw;
+  width: 96vw;
+  min-height: 100vh;
   background-color: #EEEEEE;
   color: #000000;
   flex-direction: column;
@@ -45,8 +46,8 @@ html,body
   position: relative;
   top: -80px;
   left: 7vw;
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
   border-radius: 100px;
 }
 
@@ -63,6 +64,7 @@ html,body
   -webkit-transition: all 0.4s ease-in-out 0s;
   -moz-transition: all 0.4s ease-in-out 0s;
   transition: all 0.4s ease-in-out 0s;
+  z-index: 2;
 }
 
 .profile-pic:hover .profile-pic-overlay{
@@ -70,7 +72,15 @@ html,body
 }
 
 .profile-pic-image{
-  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  z-index: 1;
 }
 
 
@@ -89,6 +99,7 @@ html,body
   -webkit-transition: all 0.3s ease-in-out 0s;
   -moz-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
+  z-index: 2;
 }
 
 .profile-pic:hover .profile-pic-details{
@@ -99,12 +110,12 @@ html,body
 
 .profile-pic-details p{
   color: white;
-  font-size: 10pt;
+  font-size: 1.5vh;
 }
 
 .profile-pic-details input{
   color: white;
-  font-size: 10pt;
+  font-size: 1.4vh;
 }
 
 .fadeIn-top{
