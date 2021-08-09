@@ -8,4 +8,4 @@ The [backend](https://github.com/royleochan/workout-party-backend) of this appli
 
 ## Additional Information:
 ### Built for AWS Educate: Build On, Singapore 2020
-Attained TOp 7 Finalist
+Attained Top 7 Finalist
